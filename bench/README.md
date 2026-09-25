@@ -1,6 +1,6 @@
 # Mess-Kit
 
-Dieselben Werkzeuge wie in allen Messungen dieses Ordners und in `../../SGLANG/`.
+Dieselben Werkzeuge wie in allen Messungen unter `../data/`, auch beim SGLang-Vergleich (`../data/sglang-challenger-2026-09-25/`).
 
 | Datei | Zweck |
 |---|---|

@@ -7,7 +7,7 @@ Tool-Calling, lange Kontexte, 24/7.
 > **English TL;DR:** Qwen3.8-Flash-Next NVFP4 on a single GB10 (DGX Spark class), full 262k context, vLLM 0.29.0 +
 > the community patches from `blazux/qwen3.8-Flash-DGX`, MTP=2 speculative decoding with a German-tuned draft vocabulary.
 > Everything needed to rebuild it is here: image recipe, exact launch line, systemd unit, memory watchdog, checks, raw benchmark data.
-> SGLang was tested head-to-head on the same box and lost (see `SGLANG_README.md`).
+> SGLang was tested head-to-head on the same box and lost (see `de/SGLANG_README.md`).
 
 ## Ergebnis in einem Satz
 
@@ -37,23 +37,29 @@ Details, Rohdaten und der Weg dorthin (A → B → C_de): [ERGEBNISSE.md](ERGEBN
 | Community-Patches | [`blazux/qwen3.8-Flash-DGX@d542745`](https://github.com/blazux/qwen3.8-Flash-DGX) (Apache-2.0) | PLE-Tabelle per mmap von der NVMe, GB10-Anpassungen für FLA/GDN, FP8-Hybrid, MTP-Backport |
 | Modell | `RadixArk/Qwen3.8-Flash-Next-NVFP4` @ `7b719225242aacd3dbd3f9407468c2ee9a9d2594` | passt mit PLE-mmap auf ein GB10 |
 | Spekulatives Decoding | MTP, 2 Tokens | 1 = Agentenschritte +18 %, 3/4 = Decode −12/−16 % |
-| Draft-Vokabular | eigenes deutsches Vokabular, 65'536 IDs ([draftvocab/](draftvocab/)) | Standard (englisch) senkt die Acceptance bei deutschem Text. Das DE-Vokabular bringt +8 % Decode und +5 % E2E |
+| Draft-Vokabular | eigenes deutsches Vokabular, 65'536 IDs ([draftvocab/](../draftvocab/)) | Standard (englisch) senkt die Acceptance bei deutschem Text. Das DE-Vokabular bringt +8 % Decode und +5 % E2E |
 | KV-Cache | 12 GiB fest | genug für 262k plus Reserve, lässt Luft über dem RAM-Wächter |
 
 ## Aufbau dieses Ordners
 
 ```
 GoldVllm/
-├── README.md          diese Seite
-├── INSTALL.md         Schritt für Schritt: Image bauen, Modell laden, starten, prüfen
-├── KONFIGURATION.md   jedes Argument und jede Umgebungsvariable mit Begründung
-├── BETRIEB.md         systemd, RAM-Wächter, Recovery, Prüfung, Restore, Stolpersteine
-├── ERGEBNISSE.md      Messwerte, Methodik, Vergleich mit den Vorstufen
+├── README.md          Übersicht (englisch)
+├── AI_AGENT_GUIDE.md  Regeln für KI-Assistenten (englisch)
+├── Anleitung/         Mensch/ und AI/: Anleitungen auf Deutsch, je als Markdown und PDF
+├── de/
+│   ├── README.md          diese Seite
+│   ├── INSTALL.md         Schritt für Schritt: Image bauen, Modell laden, starten, prüfen
+│   ├── KONFIGURATION.md   jedes Argument und jede Umgebungsvariable mit Begründung
+│   ├── BETRIEB.md         systemd, RAM-Wächter, Recovery, Prüfung, Restore, Stolpersteine
+│   ├── ERGEBNISSE.md      Messwerte, Methodik, Vergleich mit den Vorstufen
+│   └── SGLANG_*.md        Vergleich mit SGLang und wie man ihn nachstellt
+├── docs/              dieselben Dokumente auf Englisch, plus LESSONS
 ├── config/            run-goldvllm.sh, systemd-Units, RAM-Wächter, serve.sh-Patch
 ├── draftvocab/        draft_vocab_de_65536.npy (SHA256 a8647394…) und wie es entsteht
 ├── build/             Image-Rezept
 ├── bench/             Mess-Kit (G30, Agent 30k/80k, TTFT, Qualitätsset, Gates, Sampler)
-└── daten/             Rohdaten: Baseline 25.09., C_de-Qualifikation (JSON/CSV), Modell-Manifest
+└── data/              Rohdaten: Baseline 25.09., C_de-Qualifikation (JSON/CSV), Modell-Manifest
 ```
 
 Der Restore Point des Autors (Inventar, Siegel, Restore/Verify gegen sein Backup) ist gerätespezifisch und nicht Teil dieses Repos.

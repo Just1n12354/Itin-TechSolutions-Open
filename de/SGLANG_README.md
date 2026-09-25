@@ -48,4 +48,4 @@ Beides war nicht Teil dieses Tests.
 
 ## Nachstellen
 
-[INSTALL.md](INSTALL.md): Image per Digest, Startzeile, PLE-Verzeichnis, Korrektheits-Gates, Messung.
+[SGLANG_INSTALL.md](SGLANG_INSTALL.md): Image per Digest, Startzeile, PLE-Verzeichnis, Korrektheits-Gates, Messung.

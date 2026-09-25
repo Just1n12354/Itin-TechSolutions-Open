@@ -7,6 +7,33 @@ Die technischen Einzelheiten stehen in den Originaldokumenten (`de/` und `docs/`
 
 ---
 
+## 0 Ganz kurz, ohne Fachbegriffe
+
+**Was ist das?** Ein Rezept, mit dem eine künstliche Intelligenz (ähnlich wie ChatGPT) auf einem eigenen Rechner im Büro oder zu Hause läuft –
+ohne Cloud, ohne dass Daten das Haus verlassen, ohne monatliche Gebühren pro Anfrage.
+
+**Welcher Rechner?** Ein bestimmter Kleinrechner von NVIDIA mit dem Chip „GB10“ (verkauft als DGX Spark oder ASUS Ascent GX10).
+Auf einem normalen PC oder Laptop funktioniert dieses Rezept **nicht**.
+
+**Was bringt das Rezept?** Man könnte die KI auch mit Standard-Einstellungen starten. Wir haben aber über Tage gemessen, welche Einstellungen
+auf genau diesem Rechner am schnellsten **und** am stabilsten sind – und alles aufgeschrieben. Wer das Rezept nachkocht, bekommt dasselbe
+Ergebnis, ohne dieselben Fehler nochmals zu machen.
+
+**Was muss ich können?** Für die Einrichtung (Kapitel 4) braucht man Grundkenntnisse im Linux-Terminal: Befehle kopieren, ausführen,
+Ausgaben lesen. Wer das nicht kann, gibt die Aufgabe am besten einem KI-Assistenten mit Terminalzugriff und legt ihm die Datei
+`Anleitung/AI/GoldVllm_Anleitung_KI.md` hin – dafür ist sie gemacht.
+
+**Welche Kapitel brauche ich?**
+
+| Ich will … | Lesen |
+|---|---|
+| nur verstehen, was das ist | Kapitel 0–2 |
+| es selbst einrichten | Kapitel 3–5 |
+| wissen, was bei einer Störung zu tun ist | Kapitel 6 |
+| selbst daran herumschrauben | Kapitel 7, danach `de/ERGEBNISSE.md` und `docs/LESSONS.md` |
+
+---
+
 ## 1 Worum geht es?
 
 GoldVllm ist eine fertig eingestellte Konfiguration, mit der ein grosses Sprachmodell lokal auf **einem einzigen** NVIDIA-GB10-Rechner läuft
@@ -76,7 +103,7 @@ docker run --rm --gpus all --entrypoint nvidia-smi vllm/vllm-openai:v0.29.0
 
 Es muss eine Tabelle mit „GB10“ erscheinen. Wenn nicht: zuerst Treiber und nvidia-container-toolkit in Ordnung bringen.
 
-### Schritt 2 – Das Image bauen (ca. 2 Minuten mit BuildKit)
+### Schritt 2 – Das Image bauen
 
 ```bash
 git clone https://github.com/blazux/qwen3.8-Flash-DGX.git
@@ -86,7 +113,10 @@ DOCKER_BUILDKIT=1 docker build -f Dockerfile.v0.29 -t gx10-vllm:goldvllm .
 cd ..
 ```
 
-Wichtig ist `DOCKER_BUILDKIT=1`. Ohne das dauert der Bau rund zwei Stunden.
+Wichtig ist `DOCKER_BUILDKIT=1`. Der alte Builder las auf dem GX10 pro Schritt rund 30 GB und hätte etwa zwei Stunden gebraucht.
+(Wie lange der BuildKit-Bau dauert, haben wir nicht gemessen: Unser eigenes Image entstand aus demselben Rezept, abgetippt für einen
+einzigen Container, siehe `build/baue_b_inner.sh`, in 100 Sekunden.) Ein Neubau wird nie byte-gleich mit unserem Image, weil Zeitstempel einfliessen –
+das ist normal.
 Kontrolle: `docker run --rm --entrypoint python3 gx10-vllm:goldvllm -c "import vllm;print(vllm.__version__)"` muss `0.29.0` ausgeben.
 
 ### Schritt 3 – Das Modell herunterladen (135 GB)
@@ -143,15 +173,35 @@ daraus baut das Skript die langen Testdokumente.
 
 ### Schritt 7 – Dauerbetrieb einrichten
 
-Erst **RAM-Wächter**, dann den Autostart. Details in Kapitel 5.
+Erst **RAM-Wächter**, dann den Autostart, dann die Recovery. Was die drei tun, steht in Kapitel 5.
+Die Befehle laufen im Repo-Ordner. Überall, wo `DEIN_NUTZER` steht, den eigenen Linux-Benutzernamen einsetzen.
 
-1. Skripte `config/schutz/llm-memory-guard.sh` und `llm-recovery.sh` nach `/usr/local/sbin/` kopieren (ausführbar),
-   die `.service`- und `.timer`-Dateien nach `/etc/systemd/system/`. Das Repo selbst nach `/opt/goldvllm` legen –
-   Produktion darf nicht aus einem Git-Arbeitsordner laufen, der umbenannt werden könnte.
-2. `config/systemd/llm-server.service` anpassen: `DEIN_NUTZER` und Pfade ersetzen.
-3. `sudo systemctl daemon-reload && sudo systemctl enable --now llm-memory-guard.timer llm-server.service`
-   (die Recovery erst aktivieren, wenn sie angepasst ist, siehe Kapitel 8)
-4. **Einmal neu starten** und prüfen, dass alles von selbst wieder hochkommt (nach 15 min wieder Schritt 6).
+```bash
+# 1 feste Kopie für den Betrieb (nicht der Ordner, in dem man herumprobiert)
+sudo cp -r . /opt/goldvllm
+
+# 2 RAM-Wächter
+sudo install -m 0755 config/schutz/llm-memory-guard.sh /usr/local/sbin/
+sudo cp config/schutz/llm-memory-guard.service config/schutz/llm-memory-guard.timer /etc/systemd/system/
+
+# 3 Autostart: vorher in der Datei DEIN_NUTZER ersetzen
+sudo cp config/systemd/llm-server.service /etc/systemd/system/
+sudo nano /etc/systemd/system/llm-server.service
+
+# 4 Recovery: in /etc/default/llm-recovery DEIN_NUTZER ersetzen
+sudo install -m 0755 config/schutz/llm-recovery.sh /usr/local/sbin/
+sudo cp config/schutz/llm-recovery.service config/schutz/llm-recovery.timer /etc/systemd/system/
+sudo install -m 0644 config/schutz/llm-recovery.default /etc/default/llm-recovery
+sudo nano /etc/default/llm-recovery
+
+# 5 einschalten
+sudo systemctl daemon-reload
+sudo systemctl enable --now llm-memory-guard.timer
+sudo systemctl enable llm-server.service llm-recovery.timer
+```
+
+Danach **einmal neu starten** und prüfen, dass alles von selbst wieder hochkommt: 15 Minuten warten, dann nochmals Schritt 6.
+Läuft das Modell von Schritt 5 noch, zuerst `docker stop qwen38-flash` – sonst startet systemd ein zweites Mal auf eine belegte GPU.
 
 ---
 
@@ -199,8 +249,8 @@ Erst **RAM-Wächter**, dann den Autostart. Details in Kapitel 5.
 | Wächter hat gestoppt | Zuerst den Grund finden: lief ein zweites Modell, ein Test, ein grosser Zusatzprozess? Erst dann neu starten |
 | Antworten sind seltsam (Wiederholungen wie `!!!!`, leerer Text, falsche Zahlen) | Nicht weiter messen oder benutzen. `gates.py` laufen lassen. Bei Fehler: zurück auf den eingefrorenen Stand |
 | Nach Neustart keine GPU, kein Bild | Wahrscheinlich Kernel-Update ohne passende NVIDIA-Module. Kernel zurück oder Module neu bauen |
-| Recovery tut nichts | `llm-recovery.sh --status` ansehen. Bei FAILED Ursache klären, dann `--reset` |
-| Recovery hält ein gesundes Modell für krank | bekannter Stolperstein: `XDG_RUNTIME_DIR=/run/user/<uid>` fehlt beim Prüfaufruf |
+| Recovery tut nichts | `sudo llm-recovery.sh --status` und `journalctl -t llm-recovery` ansehen. Steht dort „LLMR_KEYFILE nicht gesetzt“: `/etc/default/llm-recovery` ausfüllen. Bei FAILED Ursache klären, dann `--reset` |
+| Recovery hält ein gesundes Modell für krank | den Befehl aus `LLMR_HEALTH_CMD` von Hand als `LLMR_HEALTH_USER` ausführen und schauen, woran er scheitert |
 
 **Grundregel:** `/health` sagt nur, dass der Server antwortet – nicht, dass er richtig rechnet. Im Zweifel immer `gates.py`.
 
@@ -236,10 +286,8 @@ Was wir schon getestet haben, muss man nicht nochmal machen:
 - Das Image ist aus Community-Patches gebaut, **kein** offizielles NVIDIA- oder vLLM-Produkt. Ein Neubau ist nicht byte-gleich.
 - Das Patch-Repo ist inzwischen weiter (vLLM 0.30). GoldVllm bleibt absichtlich beim getesteten Stand.
 - Das deutsche Vokabular hilft **nur bei deutschem Text**. Für Englisch nicht gemessen.
-- `config/schutz/llm-recovery.sh` ist die Fassung vom Gerät des Autors. Sie hat feste Pfade (`/home/justin/…`, Nutzer `justin`)
-  und hält das Modell nur dann für gesund, wenn `/opt/gx10/bin/verify-golden.sh` oder `pruefe_b.sh` OK meldet.
-  **Diese beiden Skripte sind nicht im Repo.** Unverändert auf einem anderen Gerät würde die Recovery jeden Versuch als gescheitert
-  werten und auf FAILED gehen. Vor dem Einsatz anpassen oder weglassen.
+- Die Recovery prüft nach einem Neustart nur, ob der Server antwortet und den Schlüssel akzeptiert. Ob er **richtig rechnet**,
+  prüft sie nur, wenn man in `/etc/default/llm-recovery` zusätzlich `LLMR_HEALTH_CMD` einträgt (Beispiel mit `gates.py` steht dort).
 
 ---
 
@@ -256,5 +304,3 @@ Was wir schon getestet haben, muss man nicht nochmal machen:
 | `bench/` | Mess- und Prüfwerkzeuge (`gates.py` ist das wichtigste) |
 | `data/` | alle Rohdaten der Messungen |
 | `Anleitung/AI/` | die Fassung dieser Anleitung für KI-Assistenten |
-
-Hinweis: In den Dokumenten unter `de/` heisst der Datenordner teilweise noch `daten/`. Im Repo heisst er **`data/`**.

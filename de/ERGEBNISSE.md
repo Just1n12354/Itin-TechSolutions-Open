@@ -1,6 +1,6 @@
 # GoldVllm — Ergebnisse und Methodik
 
-Alle Werte stammen aus eigenen Messungen auf einem ASUS Ascent GX10 (GB10) und sind als JSON/CSV in `daten/` abgelegt.
+Alle Werte stammen aus eigenen Messungen auf einem ASUS Ascent GX10 (GB10) und sind als JSON/CSV in `../data/` abgelegt.
 Die Messkette steht in `bench/`.
 
 ## Methodik
@@ -18,7 +18,7 @@ Die Messkette steht in `bench/`.
 - **E2E-Score** zum Vergleichen: geometrisches Mittel der Zeitverhältnisse von G30, Agent 30k und Agent 80k. Entschieden wird paarweise
   in ABAB-Reihenfolge (A1 B1 A2 B2), damit Tageszeit und Wärmezustand gleich sind.
 
-## Baseline 25.09.2026 (`daten/baseline-2026-09-25/`)
+## Baseline 25.09.2026 (`../data/goldvllm-baseline-2026-09-25/`)
 
 | | GOLD1 | GOLD2 |
 |---|---:|---:|
@@ -45,7 +45,7 @@ Die Messkette steht in `bench/`.
 | **B** (22.09.) | offizielles **vLLM 0.29.0** + dieselben Patches | **TTFT bei 30k–116k −32 bis −40 %, Agent 80k −26 %**, zweimal reproduziert. Decode, kurze Schritte und Qualität gleich |
 | MTP-Sweep | 1 / 2 / 3 / 4 Tokens | 2 optimal. 1: Agentenschritte +18 %. 3/4: Decode −12/−16 % |
 | Draft-Vokabular | Standard (englisch) gegen deutsch | Standard senkt die Acceptance bei deutschem Text (0.70 → 0.59). Deutsch hält sie und bringt +8 % Decode |
-| **C_de = GoldVllm** (25.09.) | B + deutsches Draft-Vokabular | ABAB gegen B: **E2E +3.95 % / +6.28 %, Mittel +5.11 %**, G30 −7.8 / −12.4 %, Qualität 4×12/12 (`daten/qualifikation-cde-2026-09-25/`) |
+| **C_de = GoldVllm** (25.09.) | B + deutsches Draft-Vokabular | ABAB gegen B: **E2E +3.95 % / +6.28 %, Mittel +5.11 %**, G30 −7.8 / −12.4 %, Qualität 4×12/12 (`../data/cde-qualification-2026-09-25/`) |
 | abgelehnt | FAST_ROWS=0, MTP 3/4, Det-Top-k-Kernel | jeweils schlechter oder ohne messbaren Nutzen für diese Last |
 | **SGLang** (25.09.) | fertiger Cookbook-Pfad für 1× Spark | E2E −0.7 % gegen GoldVllm, harte Kontextgrenze 109–127k → verworfen (`SGLANG_README.md`) |
 

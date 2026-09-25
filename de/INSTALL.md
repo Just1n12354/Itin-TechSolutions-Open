@@ -47,7 +47,7 @@ hf download RadixArk/Qwen3.8-Flash-Next-NVFP4 --revision 7b719225242aacd3dbd3f94
 ```
 
 Das ergibt 419 Dateien mit zusammen 135.3 GB. Darunter sind 10 × `model-plefp8-*.safetensors`, das ist die PLE-Tabelle (48 GB), die vLLM per mmap liest.
-Kontrolle aller Dateien und Grössen: Manifest `daten/model-snapshot-7b719225.tsv` (Spalten Datei, Blob, Bytes; bei Safetensors ist der Blob-Name der SHA256).
+Kontrolle aller Dateien und Grössen: Manifest `data/model-snapshot-7b719225.tsv` (Spalten Datei, Blob, Bytes; bei Safetensors ist der Blob-Name der SHA256).
 
 ## 3 Draft-Vokabular und API-Key
 

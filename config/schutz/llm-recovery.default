@@ -1,0 +1,18 @@
+# /etc/default/llm-recovery - Einstellungen fuer llm-recovery.sh
+# Installieren: sudo install -m 0644 llm-recovery.default /etc/default/llm-recovery
+# Danach anpassen. Ohne gueltiges LLMR_KEYFILE bleibt die Recovery inaktiv (Meldung im Journal).
+
+# Pflicht: Datei mit dem API-Key des vLLM-Servers (dieselbe wie KEYFILE in llm-server.service)
+LLMR_KEYFILE=/home/DEIN_NUTZER/.config/vllm.key
+
+# Optional: zusaetzliche Pruefung nach dem Neustart, Exit 0 = gesund. Leer = nur /health + /v1/models.
+# Beispiel mit den Korrektheits-Gates aus dem Repo:
+#LLMR_HEALTH_CMD="cd /opt/goldvllm/bench && VLLM_API_KEY=$(cat /home/DEIN_NUTZER/.config/vllm.key) KORPUS_DIR=/pfad/zu/txt python3 gates.py --url http://127.0.0.1:8000 --label recovery --ausgabe /tmp/gates-recovery.json"
+#LLMR_HEALTH_USER=DEIN_NUTZER
+
+# Nur aendern, wenn vom Standard abweichend
+#LLMR_CONTAINER=qwen38-flash
+#LLMR_UNIT=llm-server.service
+#LLMR_URL=http://127.0.0.1:8000
+#LLMR_BUSY_PATTERN=[r]un-goldvllm.sh
+#LLMR_RECOVER_MIN_MIB=114000

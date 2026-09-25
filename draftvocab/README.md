@@ -24,7 +24,7 @@ C_de-Qualifikation 25.09.2026, ABAB gegen B (volles lm_head):
 | Decode | 22.97 → 26.75 tok/s (+16.5 %) | 23.60 → 26.27 tok/s (+11.3 %) |
 | E2E (G30, Agent 30k/80k) | +3.95 % | +6.28 % |
 
-(Werte aus der C_de-Qualifikation und dem Nachtlauf 21./22.09., `../daten/qualifikation-cde-2026-09-25/FINAL_CDE_REPORT.md`.)
+(Werte aus der C_de-Qualifikation und dem Nachtlauf 21./22.09., `../data/cde-qualification-2026-09-25/FINAL_CDE_REPORT.md`.)
 
 ## Wie es entstanden ist
 

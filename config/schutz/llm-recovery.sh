@@ -1,14 +1,17 @@
 #!/bin/bash
-# llm-recovery.sh - bringt vLLM (Produktion B) zurueck, NACHDEM llm-memory-guard es gestoppt hat.
+# llm-recovery.sh - bringt vLLM (Produktion) zurueck, NACHDEM llm-memory-guard es gestoppt hat.
 #
 # Warum: llm-memory-guard.sh stoppt bei Speichernot alle LLM-Container. llm-server.service ist
 # oneshot + RemainAfterExit=yes, Restart=on-failure greift deshalb nicht, der Container hat
-# --restart no. Ohne diesen Dienst bleibt Ben nach einem Waechter-Eingriff dauerhaft weg.
+# --restart no. Ohne diesen Dienst bleibt das Modell nach einem Waechter-Eingriff dauerhaft weg.
+#
+# Konfiguration: /etc/default/llm-recovery (Vorlage: llm-recovery.default), wird vom
+# llm-recovery.service als EnvironmentFile gelesen. Pflicht ist nur LLMR_KEYFILE.
 #
 # Grundsatz: Der Waechter selbst bleibt unveraendert. Dieses Skript handelt NUR, wenn
 #   1. im Journal ein Stopp-Ereignis von llm-memory-guard steht, das noch nicht behandelt ist,
 #   2. der Produktionscontainer qwen38-flash NICHT laeuft,
-#   3. kein Start/Rollback/Test gerade laeuft (llm-server activating, switch-model/rollback, bench-*),
+#   3. kein Start/Test gerade laeuft (llm-server activating, LLMR_BUSY_PATTERN, Container bench-*),
 #   4. der Speicher sich stabil erholt hat (RECOVER_MIN_MIB, STABLE_RUNS Laeufe in Folge),
 #   5. die GPU gesund ist (nvidia-smi antwortet, keine neue Xid seit dem Ereignis),
 #   6. das Versuchsbudget nicht aufgebraucht ist (MAX_ATTEMPTS je WINDOW_S, COOLDOWN_S).
@@ -19,23 +22,28 @@
 #          llm-recovery.sh --status   Zustand anzeigen
 #          llm-recovery.sh --reset    FAILED quittieren, Versuchszaehler leeren
 # Stilllegen ohne Deinstallation: touch /etc/llm-recovery.disabled
-# Testmodus (keine Aktion, fremdes Zustandsverzeichnis): LLMR_SIMULATE=1 + SIM_*-Variablen, siehe test_recovery.sh
+# Testmodus (keine Aktion, fremdes Zustandsverzeichnis): LLMR_SIMULATE=1 + SIM_*-Variablen (SIM_NOW, SIM_MEMAVAIL,
+#   SIM_EVENT_TS, SIM_RUNNING, SIM_BUSY, SIM_XID, SIM_GPU_OK, SIM_RESTART_OK, SIM_HEALTH_OK) und LLMR_STATE_DIR
 set -u
 
 LOG_TAG="llm-recovery"
 STATE_DIR="${LLMR_STATE_DIR:-/var/lib/llm-recovery}"
 DISABLE_FILE="${LLMR_DISABLE_FILE:-/etc/llm-recovery.disabled}"
-PROD="qwen38-flash"
-UNIT="llm-server.service"
-PRUEFE_B="/opt/gx10/bin/pruefe_b.sh"
-# Seit 25.09.2026 ist GX10 GOLDEN 2026-09 (C_de) die Produktion; B bleibt versiegelter Rueckweg.
-# Gesund = einer der beiden versiegelten Staende laeuft (verify-golden.sh ODER pruefe_b.sh).
-VERIFY_GOLDEN="/opt/gx10/bin/verify-golden.sh"
-KEYFILE="/home/justin/.config/vllm.key"
+PROD="${LLMR_CONTAINER:-qwen38-flash}"
+UNIT="${LLMR_UNIT:-llm-server.service}"
+URL="${LLMR_URL:-http://127.0.0.1:8000}"
+KEYFILE="${LLMR_KEYFILE:-}"                         # Pflicht: API-Key-Datei, z. B. /home/<nutzer>/.config/vllm.key
+# Optional: zusaetzliche Pruefung nach dem Neustart, z. B. bench/gates.py. Exit 0 = gesund.
+# Laeuft als LLMR_HEALTH_USER (leer = root). XDG_RUNTIME_DIR wird gesetzt, sonst scheitert dort
+# jedes "systemctl --user" mit "Failed to connect to bus" und ein gesundes vLLM gilt als krank.
+HEALTH_CMD="${LLMR_HEALTH_CMD:-}"
+HEALTH_USER="${LLMR_HEALTH_USER:-}"
+# Prozesse, waehrend derer die Recovery nicht eingreift (eigene Start-/Rollback-Skripte), als pgrep -f-Muster
+BUSY_PATTERN="${LLMR_BUSY_PATTERN:-[r]un-goldvllm.sh}"
 
 WATCHDOG_MIB=8259          # Grenze von llm-memory-guard (122 GB belegt) als MemAvailable
 WARN_MIB=10307             # WARNING-Log unter Watchdog + 2 GiB
-# Bedarf von B im Betrieb, gemessen 24.09.2026 07:22: GPU 97'384 MiB + Host-RSS (EngineCore + API)
+# Bedarf im Betrieb, gemessen auf dem Referenzgeraet am 24.09.2026: GPU 97'384 MiB + Host-RSS (EngineCore + API)
 # 6'215 MiB = 103'599 MiB. Schwelle = Bedarf + Watchdog-Grenze + 2 GiB = ~113'900 MiB.
 # Normalzustand ohne vLLM waere ~116'300 MiB. Liegt MemAvailable darunter, ist der Verursacher noch da.
 RECOVER_MIN_MIB="${LLMR_RECOVER_MIN_MIB:-114000}"
@@ -72,7 +80,7 @@ container_running(){
 busy(){ # laeuft gerade ein Start, Rollback oder Test?
   [ -n "${SIM_BUSY:-}" ] && { [ "$SIM_BUSY" = 1 ]; return; }
   [ "$(systemctl is-active "$UNIT")" = "activating" ] && return 0
-  pgrep -f '[s]witch-model.sh|[r]ollback_(a|vllm).sh|[l]ongrun_b.sh' >/dev/null && return 0
+  [ -n "$BUSY_PATTERN" ] && pgrep -f "$BUSY_PATTERN" >/dev/null && return 0
   docker ps --format '{{.Names}}' 2>/dev/null | grep -q '^bench-' && return 0
   return 1
 }
@@ -87,23 +95,23 @@ gpu_ok(){
 do_restart(){
   if [ "$SIM" = 1 ]; then echo "[SIM] systemctl restart $UNIT"; [ "${SIM_RESTART_OK:-1}" = 1 ]; return; fi
   systemctl reset-failed "$UNIT" 2>/dev/null
-  systemctl restart "$UNIT"      # blockiert bis bereit (switch-model wartet auf /v1/models), max. 40 min
+  systemctl restart "$UNIT"      # blockiert bis bereit (ExecStartPost wartet auf /v1/models), max. 40 min
 }
 health_ok(){
   if [ "$SIM" = 1 ]; then [ "${SIM_HEALTH_OK:-1}" = 1 ]; return; fi
-  local k c
-  c=$(curl -s -o /dev/null -w '%{http_code}' -m 10 http://127.0.0.1:8000/health) || return 1
+  local k c uid
+  c=$(curl -s -o /dev/null -w '%{http_code}' -m 10 "$URL/health") || return 1
   [ "$c" = 200 ] || { log err "Healthcheck /health = $c"; return 1; }
   k=$(tr -d '\n' < "$KEYFILE")
-  c=$(curl -s -o /dev/null -w '%{http_code}' -m 10 -H "Authorization: Bearer $k" http://127.0.0.1:8000/v1/models)
+  c=$(curl -s -o /dev/null -w '%{http_code}' -m 10 -H "Authorization: Bearer $k" "$URL/v1/models")
   [ "$c" = 200 ] || { log err "Healthcheck /v1/models = $c"; return 1; }
-  if sudo -u justin "$VERIFY_GOLDEN" --still >/dev/null 2>&1; then :
-  elif "$PRUEFE_B" >/dev/null 2>&1; then log notice "Produktion laeuft als B (Rueckweg), nicht als Golden C_de"
-  else log err "weder verify-golden.sh noch pruefe_b.sh OK - Produktion entspricht keinem versiegelten Stand"; return 1; fi
-  # Hermes: Gateway-Dienst des Nutzers muss laufen (er verbindet sich pro Anfrage neu mit :8000)
-  if ! systemctl --user -M justin@ is-active hermes-gateway >/dev/null 2>&1; then
-    log warning "vLLM gesund, aber hermes-gateway nicht aktiv - Ben ueber Telegram nicht erreichbar"
-  fi
+  [ -z "$HEALTH_CMD" ] && return 0
+  if [ -n "$HEALTH_USER" ]; then
+    uid=$(id -u "$HEALTH_USER") || { log err "LLMR_HEALTH_USER $HEALTH_USER unbekannt"; return 1; }
+    sudo -u "$HEALTH_USER" env XDG_RUNTIME_DIR="/run/user/$uid" sh -c "$HEALTH_CMD" >/dev/null 2>&1
+  else
+    sh -c "$HEALTH_CMD" >/dev/null 2>&1
+  fi || { log err "LLMR_HEALTH_CMD meldet Fehler: $HEALTH_CMD"; return 1; }
   return 0
 }
 
@@ -122,6 +130,10 @@ case "${1:-}" in
 esac
 
 [ -e "$DISABLE_FILE" ] && exit 0
+if [ "$SIM" != 1 ] && [ ! -r "$KEYFILE" ]; then
+  log err "LLMR_KEYFILE nicht gesetzt oder nicht lesbar ('$KEYFILE') - Recovery inaktiv, siehe /etc/default/llm-recovery"
+  exit 0
+fi
 exec 9>"$STATE_DIR/lock"; flock -n 9 || exit 0
 
 T=$(now); MEM=$(mem_avail_mib); STATE=$(rd state NORMAL)
@@ -183,9 +195,9 @@ fi
 gpu_ok || { log err "FAILED: nvidia-smi antwortet nicht - kein automatischer Neustart"; wr state FAILED; exit 0; }
 
 wr attempts "$ATT $T"; wr last_try "$T"; wr state RECOVERING
-log warning "RECOVERING: Versuch $((N+1))/$MAX_ATTEMPTS, MemAvailable $MEM MiB, starte $UNIT neu (ca. 13-15 min)"
+log warning "RECOVERING: Versuch $((N+1))/$MAX_ATTEMPTS, MemAvailable $MEM MiB, starte $UNIT neu (ca. 15 min)"
 if do_restart && health_ok; then
-  log notice "NORMAL: Recovery erfolgreich, B gesund (MemAvailable $(mem_avail_mib) MiB)"
+  log notice "NORMAL: Recovery erfolgreich, vLLM gesund (MemAvailable $(mem_avail_mib) MiB)"
   wr handled_event "$EV"; wr state NORMAL; wr stable 0
 else
   log err "Recovery-Versuch $((N+1)) fehlgeschlagen"

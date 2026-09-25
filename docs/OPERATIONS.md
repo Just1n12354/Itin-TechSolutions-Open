@@ -25,11 +25,15 @@ Memory is therefore bounded by the fixed KV cache, not by the watchdog.
 5. the budget allows it (max. 2 attempts per 6 h, 10 min apart); otherwise it stays FAILED until `--reset`.
 
 To disable it without uninstalling: `touch /etc/llm-recovery.disabled`.
-The file is the author's version. Its health check calls device-specific verify scripts, so adapt that part.
+Setup: `llm-recovery.sh` to `/usr/local/sbin/`, `.service`/`.timer` to `/etc/systemd/system/`, and
+`config/schutz/llm-recovery.default` to `/etc/default/llm-recovery`. `LLMR_KEYFILE` **must** be set there; otherwise the recovery
+stays inactive and says so in the journal. "Healthy" means `/health` 200 and `/v1/models` with key 200. Optionally
+`LLMR_HEALTH_CMD` adds a check such as `bench/gates.py`. Show state: `llm-recovery.sh --status`.
+The author's gx10 runs an extended version that also verifies against the sealed backup.
 
 > **Pitfall (found and fixed on 25 Sep 2026):** the recovery runs as root and calls the check via `sudo -u <user>`.
 > There, `systemctl --user` fails ("Failed to connect to bus") unless `XDG_RUNTIME_DIR` is set. As a result a healthy vLLM
-> would have been judged broken and restarted up to twice. Fix: set `XDG_RUNTIME_DIR=/run/user/<uid>`. Our simulated tests had not caught it.
+> would have been judged broken and restarted up to twice. Fix: set `XDG_RUNTIME_DIR=/run/user/<uid>`. Our simulated tests had not caught it. The repo version does this itself when `LLMR_HEALTH_USER` is set.
 
 ## Checking
 

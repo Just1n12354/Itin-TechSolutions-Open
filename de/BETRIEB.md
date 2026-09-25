@@ -26,11 +26,15 @@ Begrenzt wird der Speicher deshalb über den festen KV-Cache, nicht über den W�
 5. das Budget reicht (max. 2 Versuche je 6 h, 10 min Abstand), sonst Zustand FAILED bis `--reset`.
 
 Stilllegen ohne Deinstallation: `touch /etc/llm-recovery.disabled`.
-Die Datei ist die gx10-Fassung. Die Prüfung „gesund“ ruft dort ein gerätespezifisches Verify-Skript auf, das muss man anpassen.
+Einrichten: `llm-recovery.sh` nach `/usr/local/sbin/`, `.service`/`.timer` nach `/etc/systemd/system/`, und
+`config/schutz/llm-recovery.default` als `/etc/default/llm-recovery` ablegen. Dort **muss** `LLMR_KEYFILE` stehen, sonst bleibt die
+Recovery inaktiv und meldet das im Journal. „Gesund“ heisst: `/health` 200 und `/v1/models` mit Key 200. Optional prüft
+`LLMR_HEALTH_CMD` zusätzlich, etwa mit `bench/gates.py`. Zustand ansehen: `llm-recovery.sh --status`.
+Auf dem gx10 des Autors läuft eine erweiterte Fassung, die zusätzlich gegen das versiegelte Backup prüft.
 
 > **Stolperstein (am 25.09.2026 gefunden und behoben):** Die Recovery läuft als root und ruft die Prüfung mit `sudo -u <nutzer>` auf.
 > Dort scheitert `systemctl --user` („Failed to connect to bus“), wenn `XDG_RUNTIME_DIR` fehlt. Die Folge: Ein gesundes vLLM galt als krank.
-> Lösung: `XDG_RUNTIME_DIR=/run/user/<uid>` setzen.
+> Lösung: `XDG_RUNTIME_DIR=/run/user/<uid>` setzen. Die Repo-Fassung macht das selbst, wenn `LLMR_HEALTH_USER` gesetzt ist.
 
 ## Prüfen
 

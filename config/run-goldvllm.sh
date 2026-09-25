@@ -5,7 +5,7 @@
 #   HF_CACHE=~/.cache/huggingface  VOCAB=/opt/gx10/draftvocab/draft_vocab_de_65536.npy  KEYFILE=~/.config/vllm.key \
 #   ./run-goldvllm.sh
 #
-# Voraussetzungen: siehe ../INSTALL.md (Image gebaut, Modell-Revision geladen, KEYFILE mit einem Schluessel).
+# Voraussetzungen: siehe ../docs/INSTALL.md bzw. ../de/INSTALL.md (Image gebaut, Modell-Revision geladen, KEYFILE mit einem Schluessel).
 # Bereit nach ~14-15 min ("Application startup complete"). Pruefen: curl -H "Authorization: Bearer $(cat $KEYFILE)" localhost:8000/v1/models
 set -euo pipefail
 IMAGE="${IMAGE:-gx10-vllm:goldvllm}"

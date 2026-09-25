@@ -9,7 +9,8 @@ the benchmark kit, and the raw data of every run. Also the method: how we measur
 **Give this repo to a human or to an AI assistant.** Humans start with [docs/INSTALL.md](docs/INSTALL.md).
 AI agents start with [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md), which holds the rules that kept this box stable while tuning it.
 
-> Deutsch: alle Originaldokumente in [`de/`](de/).
+> Deutsch: alle Originaldokumente in [`de/`](de/). Anleitungen auf Deutsch (Markdown + PDF): [`Anleitung/Mensch/`](Anleitung/Mensch/)
+> für Menschen vom Laien bis zum Admin, [`Anleitung/AI/`](Anleitung/AI/) für KI-Assistenten.
 
 ## Results (25 Sep 2026, mean of 2 runs, agent-style workload)
 
@@ -72,6 +73,7 @@ Then install the RAM watchdog before running it 24/7: [docs/OPERATIONS.md](docs/
 | `bench/` | benchmark and correctness kit (G30, agent 30k/80k, TTFT, quality set, gates, samplers, ABAB decision) |
 | `data/` | raw data: GoldVllm baseline, C_de qualification vs. vLLM 0.29 baseline, SGLang challenger, model manifest |
 | `de/` | German originals of the docs |
+| `Anleitung/` | German guides as Markdown + PDF: `Mensch/` for humans, `AI/` for AI assistants; `pdf_bauen.py` rebuilds the PDFs |
 
 ## SGLang?
 
