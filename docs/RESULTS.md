@@ -37,7 +37,7 @@ All numbers come from our own measurements on one ASUS Ascent GX10 (GB10), store
 
 - A real reboot came back on its own: ready after 902 s, exactly one engine, verify OK, a real agent request and a real terminal tool call OK.
 - Rollback to B and back to GoldVllm: both directions OK.
-- The first real restore from the frozen backup after the SGLang test: 814 s, 0 of 30 files differing, all checks green.
+- The first real restore from the frozen backup after the SGLang test: 814 s, 0 of 27 files differing (restore point revision 1; revision 2 with 30 files came afterwards, paths only), all checks green.
 
 ## Where the time goes (measured, 21 Sep)
 

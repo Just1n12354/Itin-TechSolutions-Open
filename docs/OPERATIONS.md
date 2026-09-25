@@ -29,7 +29,7 @@ The file is the author's version. Its health check calls device-specific verify 
 
 > **Pitfall (found and fixed on 25 Sep 2026):** the recovery runs as root and calls the check via `sudo -u <user>`.
 > There, `systemctl --user` fails ("Failed to connect to bus") unless `XDG_RUNTIME_DIR` is set. As a result a healthy vLLM
-> would have been judged broken and restarted twice. Fix: set `XDG_RUNTIME_DIR=/run/user/<uid>`. Our simulated tests had not caught it.
+> would have been judged broken and restarted up to twice. Fix: set `XDG_RUNTIME_DIR=/run/user/<uid>`. Our simulated tests had not caught it.
 
 ## Checking
 
@@ -37,7 +37,7 @@ The file is the author's version. Its health check calls device-specific verify 
 - The author's machine has a frozen restore point: a write-protected backup (`chattr +i`) of 30 files (units, scripts, key files,
   draft vocabulary) with SHA256, owner and mode, the image tar, and the model manifest. A verify script compares the live
   system against it, and a restore script brings it back in one command. After the SGLang test it ran for real: 814 s,
-  0 of 30 files differing, all checks green afterwards. Worth copying as a pattern.
+  0 of 27 files differing (restore point revision 1; revision 2 with 30 files came afterwards, paths only), all checks green afterwards. Worth copying as a pattern.
 
 ## Pitfalls we hit
 
