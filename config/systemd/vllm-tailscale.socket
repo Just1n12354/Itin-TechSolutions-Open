@@ -1,0 +1,13 @@
+[Unit]
+Description=vLLM ueber Tailscale erreichbar (<TAILNET-IP>:8000)
+Documentation=man:systemd-socket-proxyd(8)
+After=tailscaled.service
+
+[Socket]
+# FreeBind, weil tailscale0 beim Booten spaeter kommen kann als systemd.
+# Ohne das schluege der Bind fehl und der Zugang waere nach jedem Reboot weg.
+ListenStream=<TAILNET-IP>:8000
+FreeBind=true
+
+[Install]
+WantedBy=sockets.target

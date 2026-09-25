@@ -1,0 +1,20 @@
+{
+ "api_start": 0.0,
+ "engine_init": 30.0,
+ "gewichte_start": 35.0,
+ "ple_mmap": 533.0,
+ "gewichte_haupt_fertig": 608.0,
+ "modell_fertig": 714.0,
+ "compile_fertig": 752.0,
+ "profil_fertig": 792.0,
+ "kv_fertig": 797.0,
+ "graphen_fertig": 815.0,
+ "engine_fertig": 822.0,
+ "mm_warmup_fertig": 848.0,
+ "api_bereit": 861.0,
+ "gewichte_s": [
+  572.94,
+  90.93
+ ],
+ "init_engine_s": 107.88
+}

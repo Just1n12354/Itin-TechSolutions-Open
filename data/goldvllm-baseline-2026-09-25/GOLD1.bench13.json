@@ -1,0 +1,1271 @@
+{
+  "werkzeug": "benchmark_gx10.py",
+  "fassung": "1.3.1",
+  "fassung_hinweis": "Tests, Prompts, Messgroessen und Auswertung sind identisch zu 1.3. Einziger Unterschied: die beiden Abbruchgrenzen sind ueber Umgebungsvariablen ueberschreibbar und werden im Bericht festgehalten. Ohne gesetzte Variablen ist das Verhalten exakt 1.3.",
+  "sicherheitsgrenzen": {
+    "min_verfuegbar_mb": 2048,
+    "max_swap_zuwachs_mb": 4096,
+    "standard_1_3": {
+      "min_verfuegbar_mb": 2048,
+      "max_swap_zuwachs_mb": 2048
+    }
+  },
+  "erstellt": "2026-09-25T13:17:42+02:00",
+  "hinweis": "Reine Messung. Es wurde nichts am laufenden System geaendert: keine Flags, keine Units, kein Container, kein Modell.",
+  "system": {
+    "zeitpunkt_lokal": "2026-09-25T13:17:42+02:00",
+    "hostname": "gx10",
+    "hardware": "GX10",
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.0-1019-nvidia",
+    "architektur": "aarch64",
+    "kernel_seitengroesse_byte": 4096,
+    "transparent_hugepages": "always [madvise] never",
+    "hugepages_total": 0,
+    "cpu_modelle": [
+      "Cortex-X925",
+      "Cortex-A725"
+    ],
+    "cpu_kerne": 20,
+    "cpu_governor": "performance",
+    "ram_gesamt_mb": 124608,
+    "ram_verfuegbar_mb": 15762,
+    "ram_frei_mb": 835,
+    "swap_gesamt_mb": 16383,
+    "swap_belegt_mb": 6927,
+    "load": "1.50 1.63 1.48 2/1507 65971",
+    "uptime": "up 1 hour, 58 minutes",
+    "boot_zeit": "2026-09-25 11:18:53",
+    "nvidia_treiber": "580.178.04, NVIDIA GB10",
+    "cuda": "Cuda compilation tools, release 13.0, V13.0.88",
+    "start_zustand": {
+      "zeit": "2026-09-25T11:17:42+00:00",
+      "ram_verfuegbar_mb": 15756,
+      "ram_frei_mb": 825,
+      "swap_belegt_mb": 6927,
+      "pswpin": 1709270,
+      "pswpout": 3473456,
+      "load_1min": 1.5,
+      "gpu_auslastung_prozent": 95.0,
+      "gpu_temperatur_c": 68.0,
+      "gpu_takt_mhz": 2470.0,
+      "gpu_leistung_w": 43.44,
+      "thermalzonen_c": {
+        "acpitz": 70.7
+      }
+    }
+  },
+  "vllm": {
+    "container": "bench-gold1",
+    "api_port": "http://127.0.0.1:8001",
+    "startparameter": [
+      "/hf/hub/models--RadixArk--Qwen3.8-Flash-Next-NVFP4/snapshots/7b719225242aacd3dbd3f9407468c2ee9a9d2594",
+      "--served-model-name",
+      "qwen3.8-flash-next",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8000",
+      "--load-format",
+      "safetensors",
+      "--max-model-len",
+      "262144",
+      "--max-num-seqs",
+      "16",
+      "--gpu-memory-utilization",
+      "0.80",
+      "--enable-prefix-caching",
+      "--enable-chunked-prefill",
+      "--max-num-batched-tokens",
+      "8192",
+      "-cc.cudagraph_mode=PIECEWISE",
+      "-cc.splitting_ops=[\"vllm::unified_attention_with_output\",\"vllm::unified_mla_attention_with_output\",\"vllm::mamba_mixer2\",\"vllm::mamba_mixer\",\"vllm::short_conv\",\"vllm::qwen4_exp_compute_ple_ngram_ids\",\"vllm::qwen4_exp_ple_short_conv\",\"vllm::qwen4_exp_qsa_with_output\",\"vllm::linear_attention\",\"vllm::qwen_gdn_attention_core\",\"vllm::qwen_gdn_attention_core_fused_norm_packed\",\"vllm::sparse_attn_indexer\",\"vllm::ple_mmap_lookup_ids\"]",
+      "--no-enable-flashinfer-autotune",
+      "--kv-cache-dtype",
+      "auto",
+      "--kv-cache-memory-bytes",
+      "12884901888",
+      "--api-key",
+      "<entfernt>",
+      "--enable-auto-tool-choice",
+      "--tool-call-parser",
+      "qwen3_coder",
+      "--reasoning-parser",
+      "qwen3",
+      "--speculative-config",
+      "{\"method\":\"mtp\",\"num_speculative_tokens\":2}"
+    ],
+    "api_key_gesetzt": true,
+    "modell_pfad": "/hf/hub/models--RadixArk--Qwen3.8-Flash-Next-NVFP4/snapshots/7b719225242aacd3dbd3f9407468c2ee9a9d2594",
+    "served_model_name": "qwen3.8-flash-next",
+    "max_model_len": "262144",
+    "max_num_seqs": "16",
+    "gpu_memory_utilization": "0.80",
+    "tool_call_parser": "qwen3_coder",
+    "prefix_caching_flag": true,
+    "image": "gx10-vllm:goldvllm",
+    "gestartet_am": "2026-09-25T10:55:33.178412101Z",
+    "kv_cache_memory_bytes_gesetzt": true,
+    "memory_profiling_uebersprungen": true,
+    "gpu_memory_utilization_wirksam": false,
+    "kv_cache_reserviert_gib": 12.0,
+    "warnung_vllm": "vLLM meldet: KV-Cache wurde ueber kv_cache_memory_bytes fest gesetzt, Memory Profiling uebersprungen, gpu_memory_utilization wird NICHT respektiert. Der Wert --gpu-memory-utilization ist damit wirkungslos.",
+    "kv_cache_kapazitaet_tokens": 424354,
+    "max_nebenlaeufigkeit_bei_vollkontext": 1.62,
+    "gpu_prozesse": [
+      "VLLM::EngineCore, 98206"
+    ],
+    "api_modelle": [
+      {
+        "id": "qwen3.8-flash-next",
+        "max_model_len": 262144
+      }
+    ]
+  },
+  "tests": [
+    {
+      "test": "A_kurz",
+      "prompt_zeichen": 46,
+      "prompt_pruefsumme": "5ddcbc508d0c2e3d",
+      "max_tokens": 128,
+      "fehler": null,
+      "timeout": false,
+      "ttft_s": 0.22277928099993005,
+      "input_tokens": 66,
+      "output_tokens": 128,
+      "reasoning_stuecke": 63,
+      "content_stuecke": 0,
+      "gesamtdauer_s": 4.943934330999582,
+      "stream_stuecke": 63,
+      "prefill_tokens_s": 296.3,
+      "generation_tokens_s": 27.11,
+      "systemzustand": {
+        "proben": 2,
+        "ram_verfuegbar_mb": {
+          "min": 15769,
+          "max": 15774,
+          "mittel": 15771.5
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.4,
+          "max": 1.5,
+          "mittel": 1.5
+        },
+        "gpu_auslastung_prozent": {
+          "min": 85.0,
+          "max": 95.0,
+          "mittel": 90.0
+        },
+        "gpu_temperatur_c": {
+          "min": 67.0,
+          "max": 68.0,
+          "mittel": 67.5
+        },
+        "gpu_takt_mhz": {
+          "min": 2470.0,
+          "max": 2476.0,
+          "mittel": 2473.0
+        },
+        "gpu_leistung_w": {
+          "min": 35.1,
+          "max": 43.4,
+          "mittel": 39.3
+        }
+      }
+    },
+    {
+      "test": "B_mittel",
+      "prompt_zeichen": 8042,
+      "prompt_pruefsumme": "ea2074904789ec36",
+      "max_tokens": 256,
+      "fehler": null,
+      "timeout": false,
+      "ttft_s": 1.9664210440005263,
+      "input_tokens": 3971,
+      "output_tokens": 256,
+      "reasoning_stuecke": 101,
+      "content_stuecke": 7,
+      "gesamtdauer_s": 10.172661465000601,
+      "stream_stuecke": 108,
+      "prefill_tokens_s": 2019.4,
+      "generation_tokens_s": 31.2,
+      "systemzustand": {
+        "proben": 4,
+        "ram_verfuegbar_mb": {
+          "min": 15772,
+          "max": 15777,
+          "mittel": 15775.0
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.4,
+          "max": 1.4,
+          "mittel": 1.4
+        },
+        "gpu_auslastung_prozent": {
+          "min": 0.0,
+          "max": 95.0,
+          "mittel": 65.2
+        },
+        "gpu_temperatur_c": {
+          "min": 63.0,
+          "max": 67.0,
+          "mittel": 65.2
+        },
+        "gpu_takt_mhz": {
+          "min": 2398.0,
+          "max": 2476.0,
+          "mittel": 2453.5
+        },
+        "gpu_leistung_w": {
+          "min": 17.2,
+          "max": 42.7,
+          "mittel": 32.6
+        }
+      }
+    },
+    {
+      "test": "C_lang",
+      "prompt_zeichen": 64036,
+      "prompt_pruefsumme": "e04d5d52ca5855cd",
+      "max_tokens": 256,
+      "fehler": null,
+      "timeout": false,
+      "ttft_s": 7.073098836999634,
+      "input_tokens": 15596,
+      "output_tokens": 256,
+      "reasoning_stuecke": 112,
+      "content_stuecke": 0,
+      "gesamtdauer_s": 15.700821817999895,
+      "stream_stuecke": 112,
+      "prefill_tokens_s": 2205.0,
+      "generation_tokens_s": 29.67,
+      "systemzustand": {
+        "proben": 6,
+        "ram_verfuegbar_mb": {
+          "min": 15763,
+          "max": 15794,
+          "mittel": 15779.5
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.2,
+          "max": 1.3,
+          "mittel": 1.2
+        },
+        "gpu_auslastung_prozent": {
+          "min": 0.0,
+          "max": 96.0,
+          "mittel": 73.8
+        },
+        "gpu_temperatur_c": {
+          "min": 62.0,
+          "max": 72.0,
+          "mittel": 67.3
+        },
+        "gpu_takt_mhz": {
+          "min": 2405.0,
+          "max": 2476.0,
+          "mittel": 2458.8
+        },
+        "gpu_leistung_w": {
+          "min": 13.5,
+          "max": 62.1,
+          "mittel": 39.5
+        }
+      }
+    },
+    {
+      "test": "D_prefix_kalt",
+      "prompt_zeichen": 16021,
+      "prompt_pruefsumme": "80cf09894c00e8d7",
+      "max_tokens": 128,
+      "fehler": null,
+      "timeout": false,
+      "ttft_s": 2.229798868999751,
+      "input_tokens": 4416,
+      "output_tokens": 128,
+      "reasoning_stuecke": 59,
+      "content_stuecke": 0,
+      "gesamtdauer_s": 6.673819361999449,
+      "stream_stuecke": 59,
+      "prefill_tokens_s": 1980.4,
+      "generation_tokens_s": 28.8,
+      "systemzustand": {
+        "proben": 3,
+        "ram_verfuegbar_mb": {
+          "min": 15787,
+          "max": 15791,
+          "mittel": 15788.7
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.2,
+          "max": 1.2,
+          "mittel": 1.2
+        },
+        "gpu_auslastung_prozent": {
+          "min": 0.0,
+          "max": 95.0,
+          "mittel": 60.7
+        },
+        "gpu_temperatur_c": {
+          "min": 62.0,
+          "max": 66.0,
+          "mittel": 64.7
+        },
+        "gpu_takt_mhz": {
+          "min": 2411.0,
+          "max": 2476.0,
+          "mittel": 2454.3
+        },
+        "gpu_leistung_w": {
+          "min": 13.5,
+          "max": 46.9,
+          "mittel": 31.9
+        }
+      }
+    },
+    {
+      "test": "D_prefix_warm",
+      "prompt_zeichen": 16021,
+      "prompt_pruefsumme": "80cf09894c00e8d7",
+      "max_tokens": 128,
+      "fehler": null,
+      "timeout": false,
+      "ttft_s": 1.3559875029995965,
+      "input_tokens": 4416,
+      "output_tokens": 128,
+      "reasoning_stuecke": 60,
+      "content_stuecke": 0,
+      "gesamtdauer_s": 5.717264629000056,
+      "stream_stuecke": 60,
+      "prefill_tokens_s": 3256.7,
+      "generation_tokens_s": 29.35,
+      "systemzustand": {
+        "proben": 2,
+        "ram_verfuegbar_mb": {
+          "min": 15783,
+          "max": 15792,
+          "mittel": 15787.5
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.2,
+          "max": 1.2,
+          "mittel": 1.2
+        },
+        "gpu_auslastung_prozent": {
+          "min": 0.0,
+          "max": 80.0,
+          "mittel": 40.0
+        },
+        "gpu_temperatur_c": {
+          "min": 61.0,
+          "max": 65.0,
+          "mittel": 63.0
+        },
+        "gpu_takt_mhz": {
+          "min": 2411.0,
+          "max": 2476.0,
+          "mittel": 2443.5
+        },
+        "gpu_leistung_w": {
+          "min": 13.4,
+          "max": 35.9,
+          "mittel": 24.6
+        }
+      },
+      "ttft_verbesserung_prozent": 39.2
+    },
+    {
+      "test": "E_parallel_1",
+      "anfragen": 1,
+      "erfolgreich": 1,
+      "fehler": [],
+      "timeouts": 0,
+      "gesamtdauer_s": 8.88,
+      "requests_s": 0.113,
+      "ttft_s_median": 1.385,
+      "generation_tokens_s_je_anfrage_median": 26.69,
+      "generation_tokens_s_summe": 22.52,
+      "ausgabe_tokens_summe": 200,
+      "systemzustand": {
+        "proben": 3,
+        "ram_verfuegbar_mb": {
+          "min": 15790,
+          "max": 15793,
+          "mittel": 15791.7
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.1,
+          "max": 1.1,
+          "mittel": 1.1
+        },
+        "gpu_auslastung_prozent": {
+          "min": 79.0,
+          "max": 91.0,
+          "mittel": 84.3
+        },
+        "gpu_temperatur_c": {
+          "min": 65.0,
+          "max": 66.0,
+          "mittel": 65.7
+        },
+        "gpu_takt_mhz": {
+          "min": 2476.0,
+          "max": 2483.0,
+          "mittel": 2478.3
+        },
+        "gpu_leistung_w": {
+          "min": 35.1,
+          "max": 36.3,
+          "mittel": 35.5
+        }
+      }
+    },
+    {
+      "test": "E_parallel_2",
+      "anfragen": 2,
+      "erfolgreich": 2,
+      "fehler": [],
+      "timeouts": 0,
+      "gesamtdauer_s": 12.05,
+      "requests_s": 0.166,
+      "ttft_s_median": 3.102,
+      "generation_tokens_s_je_anfrage_median": 22.44,
+      "generation_tokens_s_summe": 33.2,
+      "ausgabe_tokens_summe": 400,
+      "systemzustand": {
+        "proben": 4,
+        "ram_verfuegbar_mb": {
+          "min": 15739,
+          "max": 15786,
+          "mittel": 15761.5
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.1,
+          "max": 1.1,
+          "mittel": 1.1
+        },
+        "gpu_auslastung_prozent": {
+          "min": 9.0,
+          "max": 96.0,
+          "mittel": 69.0
+        },
+        "gpu_temperatur_c": {
+          "min": 63.0,
+          "max": 70.0,
+          "mittel": 65.8
+        },
+        "gpu_takt_mhz": {
+          "min": 2437.0,
+          "max": 2476.0,
+          "mittel": 2463.2
+        },
+        "gpu_leistung_w": {
+          "min": 31.8,
+          "max": 39.2,
+          "mittel": 36.0
+        }
+      }
+    },
+    {
+      "test": "E_parallel_4",
+      "anfragen": 4,
+      "erfolgreich": 4,
+      "fehler": [],
+      "timeouts": 0,
+      "gesamtdauer_s": 15.68,
+      "requests_s": 0.255,
+      "ttft_s_median": 3.743,
+      "generation_tokens_s_je_anfrage_median": 17.34,
+      "generation_tokens_s_summe": 51.01,
+      "ausgabe_tokens_summe": 800,
+      "systemzustand": {
+        "proben": 6,
+        "ram_verfuegbar_mb": {
+          "min": 15601,
+          "max": 15776,
+          "mittel": 15633.7
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.0,
+          "max": 1.1,
+          "mittel": 1.0
+        },
+        "gpu_auslastung_prozent": {
+          "min": 76.0,
+          "max": 96.0,
+          "mittel": 84.8
+        },
+        "gpu_temperatur_c": {
+          "min": 64.0,
+          "max": 69.0,
+          "mittel": 66.0
+        },
+        "gpu_takt_mhz": {
+          "min": 2457.0,
+          "max": 2476.0,
+          "mittel": 2470.8
+        },
+        "gpu_leistung_w": {
+          "min": 36.7,
+          "max": 60.8,
+          "mittel": 41.4
+        }
+      }
+    },
+    {
+      "test": "G_agent",
+      "sampling": {
+        "temperature": 0.0,
+        "top_p": null
+      },
+      "fehlerklassen": {
+        "kein_tool_call": 0,
+        "falscher_tool_name": 0,
+        "ungueltiges_json": 0,
+        "falscher_pfad": 0,
+        "schritte_ohne_nutzbare_aktion": 0
+      },
+      "prompt_tokens_median": 382.0,
+      "completion_tokens_median": 60.5,
+      "schritte_geplant": 30,
+      "schritte_gelaufen": 30,
+      "fehler": [],
+      "timeouts": 0,
+      "gesamtdauer_s": 61.61,
+      "schritte_pro_minute": 29.22,
+      "time_to_useful_action_s": {
+        "median": 1.464,
+        "p95": 1.771,
+        "min": 1.133,
+        "max": 2.389,
+        "mittel": 1.529
+      },
+      "t_erster_reasoning_s": {
+        "median": 0.464,
+        "p95": 0.478,
+        "min": 0.421,
+        "max": 0.489,
+        "mittel": 0.462
+      },
+      "t_erster_tool_call_s": {
+        "median": 1.464,
+        "p95": 1.771,
+        "min": 1.133,
+        "max": 2.389,
+        "mittel": 1.529
+      },
+      "t_erster_content_s": null,
+      "gesamtdauer_je_schritt_s": {
+        "median": 1.99,
+        "p95": 2.327,
+        "min": 1.633,
+        "max": 2.898,
+        "mittel": 2.051
+      },
+      "tool_call_erfolge": 30,
+      "tool_call_erfolgsrate": 1.0,
+      "finish_reasons": {
+        "tool_calls": 30
+      },
+      "reasoning_tokens_median": 26.0,
+      "sichtbare_tokens_median": 34.0,
+      "reasoning_anteil": 0.445,
+      "systemzustand": {
+        "proben": 13,
+        "ram_verfuegbar_mb": {
+          "min": 15608,
+          "max": 15624,
+          "mittel": 15616.1
+        },
+        "swap_belegt_mb": {
+          "min": 6927,
+          "max": 6927,
+          "mittel": 6927.0
+        },
+        "load_1min": {
+          "min": 1.0,
+          "max": 1.2,
+          "mittel": 1.1
+        },
+        "gpu_auslastung_prozent": {
+          "min": 0.0,
+          "max": 96.0,
+          "mittel": 84.4
+        },
+        "gpu_temperatur_c": {
+          "min": 61.0,
+          "max": 69.0,
+          "mittel": 65.6
+        },
+        "gpu_takt_mhz": {
+          "min": 2411.0,
+          "max": 2489.0,
+          "mittel": 2477.4
+        },
+        "gpu_leistung_w": {
+          "min": 13.1,
+          "max": 44.3,
+          "mittel": 38.9
+        }
+      },
+      "schritte": [
+        {
+          "pfad": "/etc/hostname",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.42120479799996247,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4209830139998303,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/hostname"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 59,
+          "reasoning_tokens": 25,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.930532826999297,
+          "time_to_useful_action_s": 1.4209830139998303
+        },
+        {
+          "pfad": "/etc/hosts",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4636192879997907,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4641161429999556,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/hosts"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 59,
+          "reasoning_tokens": 25,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9692701149997447,
+          "time_to_useful_action_s": 1.4641161429999556
+        },
+        {
+          "pfad": "/etc/os-release",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.45999317199948564,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4644068170000537,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/os-release"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 58,
+          "reasoning_tokens": 24,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9743493989999479,
+          "time_to_useful_action_s": 1.4644068170000537
+        },
+        {
+          "pfad": "/etc/fstab",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.45960319099958724,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.6809807859999637,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/fstab"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 68,
+          "reasoning_tokens": 34,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 2.1827001639994705,
+          "time_to_useful_action_s": 1.6809807859999637
+        },
+        {
+          "pfad": "/etc/passwd",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.459516008000719,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4232099790006032,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/passwd"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 59,
+          "reasoning_tokens": 25,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9363773530003527,
+          "time_to_useful_action_s": 1.4232099790006032
+        },
+        {
+          "pfad": "/etc/group",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.48924077799983934,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.5173424019994854,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/group"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 54,
+          "reasoning_tokens": 21,
+          "sichtbare_tokens": 33,
+          "gesamtdauer_s": 2.025763151999854,
+          "time_to_useful_action_s": 1.5173424019994854
+        },
+        {
+          "pfad": "/etc/shells",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4642033870004525,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4547677880000265,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/shells"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9628781880001043,
+          "time_to_useful_action_s": 1.4547677880000265
+        },
+        {
+          "pfad": "/etc/services",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.45823753500008024,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.3701594049998675,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/services"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 56,
+          "reasoning_tokens": 23,
+          "sichtbare_tokens": 33,
+          "gesamtdauer_s": 1.8772939529999348,
+          "time_to_useful_action_s": 1.3701594049998675
+        },
+        {
+          "pfad": "/etc/protocols",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4685959670005104,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4424861210000017,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/protocols"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9409409380004945,
+          "time_to_useful_action_s": 1.4424861210000017
+        },
+        {
+          "pfad": "/etc/timezone",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.46563434600011533,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4395930609998686,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/timezone"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9507265749998624,
+          "time_to_useful_action_s": 1.4395930609998686
+        },
+        {
+          "pfad": "/proc/cpuinfo",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.42842252899936284,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.1328360219995375,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/proc/cpuinfo"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 51,
+          "reasoning_tokens": 16,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 1.633073250999587,
+          "time_to_useful_action_s": 1.1328360219995375
+        },
+        {
+          "pfad": "/proc/meminfo",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4746126390000427,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.7502114740000252,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/proc/meminfo"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 72,
+          "reasoning_tokens": 36,
+          "sichtbare_tokens": 36,
+          "gesamtdauer_s": 2.327483819999543,
+          "time_to_useful_action_s": 1.7502114740000252
+        },
+        {
+          "pfad": "/proc/version",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.46312529999977414,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.6084729189997233,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/proc/version"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 62,
+          "reasoning_tokens": 28,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 2.2021498539997992,
+          "time_to_useful_action_s": 1.6084729189997233
+        },
+        {
+          "pfad": "/proc/uptime",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4678504539997448,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 2.3886320689998684,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/proc/uptime"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 86,
+          "reasoning_tokens": 51,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 2.8979490649999207,
+          "time_to_useful_action_s": 2.3886320689998684
+        },
+        {
+          "pfad": "/proc/stat",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.45866246900004626,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.6030504640002619,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/proc/stat"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 66,
+          "reasoning_tokens": 32,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 2.109670030000416,
+          "time_to_useful_action_s": 1.6030504640002619
+        },
+        {
+          "pfad": "/etc/nsswitch.conf",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4692351089997828,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.522251091999351,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/nsswitch.conf"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 384,
+          "output_tokens": 65,
+          "reasoning_tokens": 29,
+          "sichtbare_tokens": 36,
+          "gesamtdauer_s": 2.104883969999719,
+          "time_to_useful_action_s": 1.522251091999351
+        },
+        {
+          "pfad": "/etc/resolv.conf",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4648932030004289,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4318219880005927,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/resolv.conf"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 62,
+          "reasoning_tokens": 27,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 2.005956463000075,
+          "time_to_useful_action_s": 1.4318219880005927
+        },
+        {
+          "pfad": "/etc/profile",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.46531217900064803,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.770895465000649,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/profile"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 66,
+          "reasoning_tokens": 33,
+          "sichtbare_tokens": 33,
+          "gesamtdauer_s": 2.2695792670001538,
+          "time_to_useful_action_s": 1.770895465000649
+        },
+        {
+          "pfad": "/etc/environment",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.46269071599999734,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.598009054000613,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/environment"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 381,
+          "output_tokens": 63,
+          "reasoning_tokens": 30,
+          "sichtbare_tokens": 33,
+          "gesamtdauer_s": 2.095942620000642,
+          "time_to_useful_action_s": 1.598009054000613
+        },
+        {
+          "pfad": "/etc/crontab",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.46521118900000147,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.5025000630002978,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/crontab"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 63,
+          "reasoning_tokens": 28,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 2.014310674000626,
+          "time_to_useful_action_s": 1.5025000630002978
+        },
+        {
+          "pfad": "/etc/issue",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.43087334699976054,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.395541650999803,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/issue"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.9042839849998927,
+          "time_to_useful_action_s": 1.395541650999803
+        },
+        {
+          "pfad": "/etc/motd",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.464428857000712,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.322771914000441,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/motd"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 52,
+          "reasoning_tokens": 17,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 1.8310200579999218,
+          "time_to_useful_action_s": 1.322771914000441
+        },
+        {
+          "pfad": "/etc/login.defs",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.470792246000201,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.48614055500002,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/login.defs"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 58,
+          "reasoning_tokens": 23,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 1.9978097769999295,
+          "time_to_useful_action_s": 1.48614055500002
+        },
+        {
+          "pfad": "/etc/sysctl.conf",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4649935289999121,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4284991069998796,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/sysctl.conf"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 62,
+          "reasoning_tokens": 27,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 1.9829687559995364,
+          "time_to_useful_action_s": 1.4284991069998796
+        },
+        {
+          "pfad": "/etc/locale.gen",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4631813599999077,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.7577273550004975,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/locale.gen"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 68,
+          "reasoning_tokens": 34,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 2.2811089110000466,
+          "time_to_useful_action_s": 1.7577273550004975
+        },
+        {
+          "pfad": "/etc/debian_version",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4689555830000245,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4298263729997416,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/debian_version"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 61,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 1.9450264509996487,
+          "time_to_useful_action_s": 1.4298263729997416
+        },
+        {
+          "pfad": "/etc/machine-id",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4632221459996799,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.7374171860001297,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/machine-id"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 383,
+          "output_tokens": 65,
+          "reasoning_tokens": 30,
+          "sichtbare_tokens": 35,
+          "gesamtdauer_s": 2.245386743999916,
+          "time_to_useful_action_s": 1.7374171860001297
+        },
+        {
+          "pfad": "/etc/localtime",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4775761170003534,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.3868727689996376,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/localtime"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 58,
+          "reasoning_tokens": 24,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.8952741180000885,
+          "time_to_useful_action_s": 1.3868727689996376
+        },
+        {
+          "pfad": "/etc/inputrc",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4671405990002313,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.4425814770002034,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/inputrc"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "reasoning_tokens": 26,
+          "sichtbare_tokens": 34,
+          "gesamtdauer_s": 1.955153773999882,
+          "time_to_useful_action_s": 1.4425814770002034
+        },
+        {
+          "pfad": "/etc/bash.bashrc",
+          "fehler": null,
+          "timeout": false,
+          "t_erster_reasoning_s": 0.4624247270003252,
+          "t_erster_content_s": null,
+          "t_erster_tool_call_s": 1.500112179000098,
+          "finish_reason": "tool_calls",
+          "tool_name": "datei_groesse",
+          "tool_argumente": {
+            "pfad": "/etc/bash.bashrc"
+          },
+          "tool_call_gueltig": true,
+          "input_tokens": 384,
+          "output_tokens": 64,
+          "reasoning_tokens": 28,
+          "sichtbare_tokens": 36,
+          "gesamtdauer_s": 2.071536852999998,
+          "time_to_useful_action_s": 1.500112179000098
+        }
+      ]
+    }
+  ],
+  "end_zustand": {
+    "zeit": "2026-09-25T11:20:19+00:00",
+    "ram_verfuegbar_mb": 15617,
+    "ram_frei_mb": 943,
+    "swap_belegt_mb": 6927,
+    "pswpin": 1710021,
+    "pswpout": 3473457,
+    "load_1min": 1.01,
+    "gpu_auslastung_prozent": 0.0,
+    "gpu_temperatur_c": 60.0,
+    "gpu_takt_mhz": 2411.0,
+    "gpu_leistung_w": 12.97,
+    "thermalzonen_c": {
+      "acpitz": 63.3
+    }
+  }
+}

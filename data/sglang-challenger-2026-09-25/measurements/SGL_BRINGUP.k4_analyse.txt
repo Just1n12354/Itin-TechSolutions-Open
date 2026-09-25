@@ -1,0 +1,32 @@
+--- Lauf 0: 999 Zeichen, 251 Tokens, finish=stop, decode=27.56
+--- Lauf 1: 949 Zeichen, 238 Tokens, finish=stop, decode=23.58
+--- Lauf 2: 970 Zeichen, 237 Tokens, finish=stop, decode=28.39
+Abweichung ab Zeichen 0/1: 63 0/2: 63
+====
+1. Ein Fehlerstromschutzschalter überwacht kontinuierlich die Stromstärke, die über den Hin- und Rückleiter fließt.
+2. Im Normalzustand ist die Summe der Ströme im Hin- und Rückleiter exakt null, da der abfließende Strom gleich dem zufließenden ist.
+3. Berührt eine Person einen spannungsführenden Leiter, fließt ein Teil des Stroms über ihren Körper zur Erde ab.
+4. Dadurch entsteht eine Differenz zwischen dem zufließenden und dem rückfließenden Strom, die als Fehlerstrom bezeichnet wird.
+5. Der FI erkennt diese Differenz durch einen magnetischen Fluss im Kernwandler, der nicht mehr kompensiert wird.
+6. Überschreitet die Differenz einen definierten Schwellenwert, meist 30 Milliamper, löst das Auslöseorgan aus.
+7. Der interne Mechanismus öffnet die Kontakte innerhalb von wenigen Millisekunden und unterbricht den Stromkreis.
+8. Diese schnelle Abschaltung verhindert, dass gefährliche Ströme lange genug durch den menschlichen Körper fließen, um tödliche Herzrhythmusstörungen zu verursachen.
+====
+1. Ein Fehlerstromschutzschalter überwacht kontinuierlich die Summe der Ströme, die über die Hin- und Rückleiter fließen.
+2. Im Normalbetrieb sind diese Ströme betragsmäßig gleich, sodass sich ihre magnetischen Felder im Kern des Wandlers aufheben.
+3. Fließt Strom über einen unerwünschten Pfad, etwa durch eine Person zur Erde, entsteht eine Differenz zwischen Hin- und Rückstrom.
+4. Diese Stromdifferenz erzeugt im Wandler einen messbaren Restmagnetfluss, der ein Signal induziert.
+5. Das elektronische Auslösemodul vergleicht dieses Signal mit einem festgelegten Schwellenwert, meist 30 Milliamper.
+6. Überschreitet die Differenz diesen Wert, gibt das Modul einen Befehl an den mechanischen Auslöser.
+7. Der Auslöser öffnet die Kontakte des Schalters innerhalb von Millisekunden und unterbricht den Stromkreis.
+8. Durch diese schnelle Trennung wird der Körper vor gefährlichen Stromstößen geschützt, die Herzrhythmusstörungen verursachen könnten.
+====
+1. Ein Fehlerstromschutzschalter überwacht kontinuierlich die Summe der elektrischen Ströme, die über die Hin- und Rückleiter fließen.
+2. Im Normalzustand ist die Summe dieser Ströme null, da der abfließende Strom gleich dem zufließenden Strom ist.
+3. Berührt eine Person einen spannungsführenden Leiter, fließt ein Teil des Stroms über ihren Körper zur Erde ab.
+4. Dadurch entsteht eine Differenz zwischen dem zufließenden und dem rückfließenden Strom, die als Fehlerstrom bezeichnet wird.
+5. Der FI erkennt diese Differenz durch einen magnetischen Fluss im Kernwandler, der nicht mehr kompensiert wird.
+6. Überschreitet der Fehlerstrom einen definierten Grenzwert, löst ein mechanischer Auslösemechanismus im Schalter aus.
+7. Dieser Mechanismus öffnet die Kontakte des Schalters innerhalb von Millisekunden und unterbricht den Stromkreis.
+8. Durch die schnelle Unterbrechung wird der gefährliche Stromfluss durch den menschlichen Körper beendet, was lebensrettend ist.
+Rechnung 5x: ['\n\n13060303', '\n\n13060303', '\n\n13060303', '\n\n13060303', '\n\n13060303']

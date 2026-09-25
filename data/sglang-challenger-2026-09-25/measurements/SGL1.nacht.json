@@ -1,0 +1,530 @@
+{
+ "werkzeug": "nacht_bench.py",
+ "label": "SGL1",
+ "url": "http://127.0.0.1:8001",
+ "modell": "qwen3.8-flash-next",
+ "start": "2026-09-25T13:49:15+02:00",
+ "metriken_start": {},
+ "teile": {
+  "decode": [
+   {
+    "lauf": 0,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.513,
+     "t_reasoning_s": 0.513,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 23.973,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 21.78
+    },
+    "metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   },
+   {
+    "lauf": 1,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.397,
+     "t_reasoning_s": 0.397,
+     "t_content_s": 14.685,
+     "t_tool_s": null,
+     "dauer_s": 22.564,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 23.05
+    },
+    "metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   },
+   {
+    "lauf": 2,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.399,
+     "t_reasoning_s": 0.399,
+     "t_content_s": 8.936,
+     "t_tool_s": null,
+     "dauer_s": 22.929,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 22.68
+    },
+    "metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   }
+  ],
+  "ctx": [
+   {
+    "ziel_tokens": 30000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": 15.595,
+     "t_reasoning_s": 15.595,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 26.867,
+     "prompt_tokens": 30448,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 22.62
+    },
+    "kalt_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": 0.422,
+     "t_reasoning_s": 0.422,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 8.43,
+     "prompt_tokens": 30473,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 31.84
+    },
+    "warm_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   },
+   {
+    "ziel_tokens": 80000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": 49.636,
+     "t_reasoning_s": 49.636,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 60.066,
+     "prompt_tokens": 79534,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 24.45
+    },
+    "kalt_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": 0.577,
+     "t_reasoning_s": 0.577,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 8.396,
+     "prompt_tokens": 79559,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 32.61
+    },
+    "warm_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   },
+   {
+    "ziel_tokens": 110000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": null,
+     "t_reasoning_s": null,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 1.377,
+     "prompt_tokens": 1,
+     "completion_tokens": 1,
+     "finish_reason": null,
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": null
+    },
+    "kalt_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": null,
+     "t_reasoning_s": null,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 0.523,
+     "prompt_tokens": 1,
+     "completion_tokens": 1,
+     "finish_reason": null,
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": null
+    },
+    "warm_metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   }
+  ],
+  "agentctx": [
+   {
+    "ziel_tokens": 30000,
+    "korrekt": true,
+    "pfade": [
+     "/projekt/a.txt",
+     "/projekt/b.txt",
+     "/projekt/c.txt"
+    ],
+    "ergebnis": "Die Dateigrößen betragen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 1200 + 3400 + 5600 = 10200 Bytes",
+    "schritte": [
+     {
+      "schritt": 0,
+      "ttua_s": 18.861,
+      "dauer_s": 19.41,
+      "prompt_tokens": 30125,
+      "completion_tokens": 139,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/a.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 1,
+      "ttua_s": 1.472,
+      "dauer_s": 2.035,
+      "prompt_tokens": 30179,
+      "completion_tokens": 55,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/b.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 2,
+      "ttua_s": 1.066,
+      "dauer_s": 1.635,
+      "prompt_tokens": 30233,
+      "completion_tokens": 44,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/c.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 3,
+      "ttua_s": 1.417,
+      "dauer_s": 3.784,
+      "prompt_tokens": 30287,
+      "completion_tokens": 133,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "fertig",
+        "args": {
+         "antwort": "Die Dateigrößen betragen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 1200 + 3400 + 5600 = 10200 Bytes"
+        }
+       }
+      ],
+      "fehler": null
+     }
+    ],
+    "gesamt_s": 26.87,
+    "ttua_median_s": 1.445,
+    "ttua_warm_median_s": 1.417,
+    "metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   },
+   {
+    "ziel_tokens": 80000,
+    "korrekt": true,
+    "pfade": [
+     "/projekt/a.txt",
+     "/projekt/b.txt",
+     "/projekt/c.txt"
+    ],
+    "ergebnis": "Dateigrößen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 10200 Bytes",
+    "schritte": [
+     {
+      "schritt": 0,
+      "ttua_s": 66.255,
+      "dauer_s": 66.884,
+      "prompt_tokens": 79817,
+      "completion_tokens": 141,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/a.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 1,
+      "ttua_s": 1.067,
+      "dauer_s": 1.622,
+      "prompt_tokens": 79883,
+      "completion_tokens": 42,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/b.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 2,
+      "ttua_s": 1.493,
+      "dauer_s": 1.958,
+      "prompt_tokens": 79937,
+      "completion_tokens": 46,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/c.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 3,
+      "ttua_s": 1.953,
+      "dauer_s": 3.608,
+      "prompt_tokens": 79991,
+      "completion_tokens": 124,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "fertig",
+        "args": {
+         "antwort": "Dateigrößen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 10200 Bytes"
+        }
+       }
+      ],
+      "fehler": null
+     }
+    ],
+    "gesamt_s": 74.08,
+    "ttua_median_s": 1.723,
+    "ttua_warm_median_s": 1.493,
+    "metriken": {
+     "roh": {},
+     "mtp_acceptance_rate": null,
+     "mtp_acceptance_length": null,
+     "prefix_hit_rate": null
+    }
+   }
+  ],
+  "qual": {
+   "qset_sha256": "04b36f2428105bccd3d96ba90c8be32d0b401d5b4aa3fd6ed0490f8cab634487",
+   "punkte": 12,
+   "von": 12,
+   "details": [
+    {
+     "id": "T1_wetter",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "wetter",
+       "args": {
+        "ort": "Luzern"
+       }
+      }
+     ],
+     "antwort": "\n\n",
+     "ok": true
+    },
+    {
+     "id": "T2_rechner",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "rechner",
+       "args": {
+        "ausdruck": "48193 * 271"
+       }
+      }
+     ],
+     "antwort": "\n\n",
+     "ok": true
+    },
+    {
+     "id": "T3_datei",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "datei_groesse",
+       "args": {
+        "pfad": "/srv/daten/bericht_2026.pdf"
+       }
+      }
+     ],
+     "antwort": "\n\n",
+     "ok": true
+    },
+    {
+     "id": "T4_kalender",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "kalender",
+       "args": {
+        "datum": "2026-10-03"
+       }
+      }
+     ],
+     "antwort": "\n\n",
+     "ok": true
+    },
+    {
+     "id": "N1_ohne_tool",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\nBern",
+     "ok": true
+    },
+    {
+     "id": "N2_ohne_tool",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n7",
+     "ok": true
+    },
+    {
+     "id": "R1_rechnen",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n3 × 80 = 240 km, 2 × 95 = 190 km, zusammen 430 km.\n\n430",
+     "ok": true
+    },
+    {
+     "id": "R2_logik",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\nCarla",
+     "ok": true
+    },
+    {
+     "id": "R3_einheiten",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n86.400 Sekunden (24 × 60 × 60).",
+     "ok": true
+    },
+    {
+     "id": "M1_mehrschritt",
+     "finish": "stop",
+     "aufrufe": [
+      "/a.txt",
+      "/b.txt"
+     ],
+     "antwort": "\n\n/a.txt: 1200 Bytes, /b.txt: 3400 Bytes → Summe: **4600 Bytes**",
+     "wiederholung_max": 1,
+     "ok": true
+    },
+    {
+     "id": "E1_fehler",
+     "finish": "stop",
+     "aufrufe": [
+      "/nicht/da.log"
+     ],
+     "antwort": "\n\nDie Datei `/nicht/da.log` existiert nicht (Datei nicht gefunden).",
+     "wiederholung_max": 1,
+     "ok": true
+    },
+    {
+     "id": "Q1_nadel",
+     "finish": "stop",
+     "antwort": "\n\nQX-7741-B",
+     "tools": [],
+     "ok": true
+    }
+   ],
+   "laengen_abbrueche": 0
+  }
+ },
+ "dauer_s": {
+  "decode": 69.5,
+  "ctx": 105.8,
+  "agentctx": 101.0,
+  "qual": 53.1
+ },
+ "metriken_ende": {},
+ "gesamt_metriken": {
+  "roh": {},
+  "mtp_acceptance_rate": null,
+  "mtp_acceptance_length": null,
+  "prefix_hit_rate": null
+ },
+ "ende": "2026-09-25T13:54:45+02:00"
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=LLM-Recovery: vLLM nach einem Stopp durch llm-memory-guard kontrolliert zurueckholen
+Documentation=file:///opt/gx10/bin/README
+After=docker.service llm-server.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/llm-recovery.sh
+# Ein Recovery-Lauf wartet auf den vollen Modellstart (llm-server: max. 2400 s)
+TimeoutStartSec=3000

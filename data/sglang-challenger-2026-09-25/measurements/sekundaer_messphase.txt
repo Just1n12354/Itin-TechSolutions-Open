@@ -1,0 +1,4 @@
+GOLD1 {'psi_mem_mess_max': 2.68, 'psi_mem_mess_median': 0.0, 'psi_mem_laden_max': 10.4, 'psi_io_mess_median': 2.21, 'cpu_med': 5.4, 'gpu_util_med': 96.0, 'memavail_min_mess': 15476.0}
+SGL1 {'psi_mem_mess_max': 1.17, 'psi_mem_mess_median': 0.0, 'psi_mem_laden_max': 48.87, 'psi_io_mess_median': 0.85, 'cpu_med': 5.7, 'gpu_util_med': 96.0, 'memavail_min_mess': 16177.0}
+GOLD2 {'psi_mem_mess_max': 0.63, 'psi_mem_mess_median': 0.0, 'psi_mem_laden_max': 10.0, 'psi_io_mess_median': 2.08, 'cpu_med': 5.4, 'gpu_util_med': 96.0, 'memavail_min_mess': 15538.0}
+SGL2 {'psi_mem_mess_max': 0.74, 'psi_mem_mess_median': 0.0, 'psi_mem_laden_max': 50.02, 'psi_io_mess_median': 0.33, 'cpu_med': 5.7, 'gpu_util_med': 96.0, 'memavail_min_mess': 16246.0}

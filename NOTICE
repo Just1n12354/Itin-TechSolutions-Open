@@ -1,0 +1,16 @@
+GoldVllm
+Copyright 2026 The GoldVllm authors
+
+This repository contains documentation, scripts, configuration and measurement data for running
+RadixArk/Qwen3.8-Flash-Next-NVFP4 with vLLM on a single NVIDIA GB10. It builds on:
+
+- vLLM (Apache-2.0), https://github.com/vllm-project/vllm - base image vllm/vllm-openai:v0.29.0
+- blazux/qwen3.8-Flash-DGX (Apache-2.0, Copyright 2026 blazux), https://github.com/blazux/qwen3.8-Flash-DGX
+  commit d542745: Dockerfile.v0.29, serve.sh, patches, tools/build_draft_vocab.py.
+  build/baue_b_inner.sh is a transcript of its Dockerfile.v0.29; config/serve.sh.goldvllm.patch modifies its scripts/serve.sh.
+- jschmied/qwen38-flash-next-gb10 (deterministic top-k kernel, fetched by Dockerfile.v0.29 at e0ef69d; switched off in GoldVllm)
+- SGLang (Apache-2.0), https://github.com/sgl-project/sglang - only used for the comparison in docs/SGLANG.md
+- The model RadixArk/Qwen3.8-Flash-Next-NVFP4 is NOT included and is subject to its own license (see its model card).
+
+draftvocab/draft_vocab_de_65536.npy is a list of token ids derived by the authors from German domain texts.
+NVIDIA documentation texts used as benchmark filler are not included.

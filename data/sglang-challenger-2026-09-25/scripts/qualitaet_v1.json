@@ -1,0 +1,33 @@
+{
+  "name": "qualitaet_v1",
+  "eingefroren": "2026-09-21, vor der ersten A-Messung. Nicht nach Ergebnissen aendern; eine Aenderung ist qualitaet_v2.",
+  "sampling": {"temperature": 0.0, "max_tokens": 3000},
+  "werkzeuge": [
+    {"type": "function", "function": {"name": "wetter", "description": "Aktuelles Wetter fuer einen Ort.",
+      "parameters": {"type": "object", "properties": {"ort": {"type": "string"}}, "required": ["ort"]}}},
+    {"type": "function", "function": {"name": "rechner", "description": "Wertet einen arithmetischen Ausdruck exakt aus.",
+      "parameters": {"type": "object", "properties": {"ausdruck": {"type": "string"}}, "required": ["ausdruck"]}}},
+    {"type": "function", "function": {"name": "datei_groesse", "description": "Gibt die Groesse einer Datei in Bytes zurueck.",
+      "parameters": {"type": "object", "properties": {"pfad": {"type": "string"}}, "required": ["pfad"]}}},
+    {"type": "function", "function": {"name": "kalender", "description": "Liest die Termine eines Datums (Format JJJJ-MM-TT).",
+      "parameters": {"type": "object", "properties": {"datum": {"type": "string"}}, "required": ["datum"]}}}
+  ],
+  "system": "Du bist Ben, ein praeziser Assistent. Nutze Werkzeuge nur, wenn sie noetig sind. Antworte knapp auf Deutsch.",
+  "aufgaben": [
+    {"id": "T1_wetter", "art": "tool", "user": "Wie ist das Wetter gerade in Luzern?", "erwartet": {"name": "wetter", "arg": "ort", "enthaelt": "Luzern"}},
+    {"id": "T2_rechner", "art": "tool", "user": "Berechne mit dem Rechner exakt 48193 * 271.", "erwartet": {"name": "rechner", "arg": "ausdruck", "enthaelt": "48193"}},
+    {"id": "T3_datei", "art": "tool", "user": "Wie gross ist die Datei /srv/daten/bericht_2026.pdf?", "erwartet": {"name": "datei_groesse", "arg": "pfad", "enthaelt": "/srv/daten/bericht_2026.pdf"}},
+    {"id": "T4_kalender", "art": "tool", "user": "Welche Termine habe ich am 3. Oktober 2026?", "erwartet": {"name": "kalender", "arg": "datum", "enthaelt": "2026-10-03"}},
+    {"id": "N1_ohne_tool", "art": "ohne_tool", "user": "Was ist die Hauptstadt der Schweiz? Antworte ohne Werkzeug in einem Wort.", "erwartet": {"enthaelt_eins": ["Bern"]}},
+    {"id": "N2_ohne_tool", "art": "ohne_tool", "user": "Wie viele Tage hat eine Woche? Antworte ohne Werkzeug nur mit der Zahl.", "erwartet": {"enthaelt_eins": ["7", "sieben"]}},
+    {"id": "R1_rechnen", "art": "ohne_tool", "user": "Ein Zug faehrt 3 Stunden mit 80 km/h und danach 2 Stunden mit 95 km/h. Wie viele Kilometer faehrt er insgesamt? Rechne ohne Werkzeug und nenne am Ende nur die Zahl.", "erwartet": {"enthaelt_eins": ["430"]}},
+    {"id": "R2_logik", "art": "ohne_tool", "user": "Anna ist aelter als Beat. Beat ist aelter als Carla. Wer ist am juengsten? Antworte ohne Werkzeug mit dem Namen.", "erwartet": {"enthaelt_eins": ["Carla"]}},
+    {"id": "R3_einheiten", "art": "ohne_tool", "user": "Wie viele Sekunden hat ein Tag? Rechne ohne Werkzeug und nenne die Zahl.", "erwartet": {"enthaelt_eins": ["86400", "86'400", "86 400", "86.400", "86,400"]}},
+    {"id": "M1_mehrschritt", "art": "mehrschritt", "user": "Ermittle mit dem Werkzeug die Groessen von /a.txt und danach von /b.txt (je ein Aufruf) und nenne dann die Summe in Bytes.",
+      "werkzeug_ergebnisse": {"/a.txt": "1200", "/b.txt": "3400"}, "erwartet": {"aufrufe": ["/a.txt", "/b.txt"], "enthaelt_eins": ["4600", "4'600", "4 600", "4.600"], "max_schritte": 6}},
+    {"id": "E1_fehler", "art": "mehrschritt", "user": "Wie gross ist die Datei /nicht/da.log?",
+      "werkzeug_ergebnisse": {"/nicht/da.log": "FEHLER: Datei nicht gefunden"}, "erwartet": {"aufrufe": ["/nicht/da.log"], "enthaelt_eins": ["nicht gefunden", "existiert nicht", "nicht vorhanden", "nicht auffindbar", "gibt es nicht"], "max_schritte": 4, "max_wiederholung": 2}},
+    {"id": "Q1_nadel", "art": "nadel", "user_frage": "Wie lautet die Seriennummer des Testgeraets laut den Unterlagen? Antworte nur mit der Seriennummer.",
+      "nadel": "Wichtiger Hinweis: Die Seriennummer des Testgeraets lautet QX-7741-B.", "kontext_tokens": 20000, "position": 0.4, "erwartet": {"enthaelt_eins": ["QX-7741-B"]}}
+  ]
+}

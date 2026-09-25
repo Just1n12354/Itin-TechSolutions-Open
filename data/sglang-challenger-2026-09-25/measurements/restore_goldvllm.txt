@@ -1,0 +1,78 @@
+GoldVllm-Backup intakt
+Modell-Snapshot vollstaendig
+0 Datei(en) weichen von GoldVllm ab
+TUE   sudo systemctl daemon-reload
+TUE   systemctl --user daemon-reload
+TUE   sudo systemctl enable llm-server.service llm-memory-guard.timer llm-recovery.timer vllm-docker.socket vllm-tailscale.socket nvidia-module-guard.timer
+TUE   sudo systemctl start llm-memory-guard.timer llm-recovery.timer vllm-docker.socket vllm-tailscale.socket nvidia-module-guard.timer
+TUE   systemctl --user enable hermes-gateway hermes-dashboard
+TUE   sudo /usr/local/sbin/llm-recovery.sh --reset
+TUE   sudo systemctl reset-failed llm-server
+TUE   sudo systemctl restart llm-server
+15:11:53 warte auf /health 200 (bis 30 min)
+15:11:53 /health 200 nach 0 s
+== Backup ==
+OK     Backup-Pruefsummen intakt (SHA256SUMS)
+OK     Image-Tar vorhanden
+OK     Image-Tar enthaelt Manifest sha256:c4a75dcb37904b2b09483e1826494d6e41309c019561e6c0b250cda6f1f4bb9d
+== Laufzeit (verify-golden.sh) ==
+DRIFT  hermes-gateway aktiv
+GOLDEN DRIFT (1 Abweichung(en)):
+  - hermes-gateway aktiv
+DRIFT  verify-golden.sh meldet Drift (siehe oben)
+== Dateien (live = GoldVllm) ==
+OK     /etc/systemd/system/llm-server.service
+OK     /etc/systemd/system/llm-memory-guard.service
+OK     /etc/systemd/system/llm-memory-guard.timer
+OK     /etc/systemd/system/llm-recovery.service
+OK     /etc/systemd/system/llm-recovery.timer
+OK     /etc/systemd/system/vllm-docker.service
+OK     /etc/systemd/system/vllm-docker.socket
+OK     /etc/systemd/system/vllm-tailscale.service
+OK     /etc/systemd/system/vllm-tailscale.socket
+OK     /etc/systemd/system/nvidia-module-guard.service
+OK     /etc/systemd/system/nvidia-module-guard.timer
+OK     /usr/local/sbin/llm-memory-guard.sh
+OK     /usr/local/sbin/llm-recovery.sh
+OK     /usr/local/sbin/nvidia-module-guard
+OK     /etc/docker/daemon.json
+OK     /etc/apt/apt.conf.d/99-nvidia-module-guard
+OK     /etc/ufw/user.rules
+OK     /etc/ufw/user6.rules
+OK     /opt/gx10/draftvocab/draft_vocab_de_65536.npy
+OK     /home/justin/bin/switch-model.sh
+OK     /home/justin/.qwen38fn-longctx/qwen3.8-Flash-DGX/scripts/serve.sh
+OK     /home/justin/.config/systemd/user/hermes-gateway.service
+OK     /home/justin/.config/systemd/user/hermes-dashboard.service
+OK     /home/justin/Dokumente/GitHub/Ragnarok/NvidiaDeveloper/gx10/tools/verify-golden.sh
+OK     /home/justin/.hermes/config.yaml
+OK     /home/justin/.config/vllm.key
+OK     /home/justin/.config/qwen-vllm/api-key
+OK     llm-server.service enabled
+OK     llm-memory-guard.timer enabled
+OK     llm-recovery.timer enabled
+OK     vllm-docker.socket enabled
+OK     vllm-tailscale.socket enabled
+OK     nvidia-module-guard.timer enabled
+OK     vllm-docker.socket aktiv
+OK     vllm-tailscale.socket aktiv
+OK     user/hermes-gateway enabled
+OK     user/hermes-dashboard enabled
+OK     llm-recovery nicht stillgelegt
+== Image ==
+OK     gx10-vllm:b-v0290-d542745 = sha256:c4a75dcb37904b2b09483e1826494d6e41309c019561e6c0b250cda6f1f4bb9d
+OK     gx10-vllm:goldvllm = sha256:c4a75dcb37904b2b09483e1826494d6e41309c019561e6c0b250cda6f1f4bb9d
+== Modell RadixArk/Qwen3.8-Flash-Next-NVFP4 @ 7b719225242aacd3dbd3f9407468c2ee9a9d2594 ==
+OK     Modell-Snapshot: 419 Dateien, Links und Groessen wie GoldVllm
+OK     Snapshot enthaelt keine Zusatzdateien
+== Umgebung ==
+OK     Kernel 7.0.0-1019-nvidia
+OK     NVIDIA-Treiber 580.178.04
+OK     Docker 29.1.3
+OK     nvidia-container-toolkit 1.20.0-1
+OK     Hermes-Commit d337b736
+OK     Tailscale-Weiterleitung :8000 lauscht
+OK     Docker-Weiterleitung :8000 lauscht
+OK     ufw aktiv
+GOLDVLLM DRIFT (1 Abweichung(en)):
+  - verify-golden.sh meldet Drift (siehe oben)

@@ -1,0 +1,13 @@
+[Unit]
+Description=TCP-Weiterleitung Tailscale -> vLLM auf 127.0.0.1:8000
+Requires=vllm-tailscale.socket
+After=vllm-tailscale.socket
+
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:8000
+DynamicUser=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+Restart=on-failure

@@ -1,0 +1,53 @@
+diff --git a/scripts/serve.sh b/scripts/serve.sh
+index cf423a1..b6aef06 100755
+--- a/scripts/serve.sh
++++ b/scripts/serve.sh
+@@ -79,6 +79,8 @@ PROM_MULTIPROC="${PROM_MULTIPROC:-0}"
+ PREWARM="${PREWARM:-0}"
+ EXTRA="${EXTRA:-}"
+ COMPILE_CACHE="${COMPILE_CACHE:-}"
++# Read-only NAS catalogue. Set NAS_MODELS_HOST= to disable explicitly.
++NAS_MODELS_HOST="${NAS_MODELS_HOST-/mnt/justnas/40_LokaleModelle}"
+ 
+ # Resolve the local snapshot directory and map it to the in-container mount.
+ REPO_DIR="$HF_CACHE/hub/models--${MODEL//\//--}"
+@@ -154,10 +156,16 @@ if [ "$MTP" != 0 ]; then
+   fi
+ fi
+ 
++DV_MNT=()
+ DETENV=(); [ "$DET_TOPK" = 1 ] && DETENV=(-e VLLM_QSA_DET_TOPK=1 -e VLLM_QSA_DET_LIB=/opt/llm/kernel-det/_C_det.so)
+ case "$DRAFT_VOCAB" in
+   0|"") ;;
+   1) DETENV+=(-e VLLM_MTP_DRAFT_VOCAB=/opt/llm/draft_vocab_65536.npy) ;;
++  # GX10 GOLDEN 2026-09 (C_de): Host-Datei read-only einhaengen, exakt wie in der Qualifikation
++  # (NIGHT_RUN_2026-09-24/CDE_BESTAETIGUNG_2026-09-25 kandidat.sh). Nur fuer absolute Host-Pfade;
++  # 0/leer (B) und 1 bleiben unveraendert.
++  /opt/gx10/*|/home/*) DV_MNT=(-v "$DRAFT_VOCAB:/opt/llm/draft_vocab_custom.npy:ro")
++                       DETENV+=(-e VLLM_MTP_DRAFT_VOCAB=/opt/llm/draft_vocab_custom.npy) ;;
+   *) DETENV+=(-e VLLM_MTP_DRAFT_VOCAB="$DRAFT_VOCAB") ;;
+ esac
+ DETENV+=(-e VLLM_PLE_MMAP_MADVISE="$MADVISE")
+@@ -187,6 +195,11 @@ case "$COMPILE_CACHE" in
+   *)  CACHE_MNT=(-v "${COMPILE_CACHE}-vllm:/root/.cache/vllm"
+                 -v "${COMPILE_CACHE}-flashinfer:/root/.cache/flashinfer") ;;
+ esac
++NAS_MNT=()
++if [ -n "$NAS_MODELS_HOST" ]; then
++  [ -d "$NAS_MODELS_HOST" ] || { echo "!! NAS model directory not found: $NAS_MODELS_HOST"; exit 1; }
++  NAS_MNT=(-v "$NAS_MODELS_HOST:/nas_models:ro")
++fi
+ 
+ docker rm -f "$NAME" >/dev/null 2>&1 || true
+ # If docker run itself fails (port already bound, ...) do not leave a Created container behind.
+@@ -195,8 +208,10 @@ trap 'rc=$?; [ $rc -ne 0 ] && docker rm -f "$NAME" >/dev/null 2>&1; exit $rc' EX
+ docker run -d --name "$NAME" --restart unless-stopped \
+   --gpus all --ipc=host --shm-size 16g -p "${PORT}:8000" \
+   -v "$HF_CACHE:/hf" -e HF_HOME=/hf -e HF_HUB_OFFLINE=1 \
++  "${NAS_MNT[@]}" \
+   "${PROM_ARGS[@]}" \
+   "${CACHE_MNT[@]}" \
++  "${DV_MNT[@]}" \
+   -e VLLM_PLE_MMAP=1 -e VLLM_PLE_MMAP_WORKERS="${WORKERS:-32}" -e VLLM_PLE_MMAP_PREWARM="$PREWARM" \
+   -e VLLM_QSA_EXACT_TOPK="$EXACT_TOPK" "${DETENV[@]}" -e VLLM_FP8_PAD_M4="$PAD_M4" \
+   -e VLLM_USE_FLASHINFER_SAMPLER=1 -e VLLM_ALLOW_LONG_MAX_MODEL_LEN="$ALLOW_LONG" \

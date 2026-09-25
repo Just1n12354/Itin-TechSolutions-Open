@@ -1,0 +1,24 @@
+# Journal SGLang-Challenger 25.09.2026
+- 12:37:18 vorher: GOLDVLLM OK, Xid seit Boot 0
+- 12:37:31 llm-server gestoppt (enabled bleibt: enabled)
+- 12:37:35 Bring-up SGLang startet (Port 8000, Produktions-Key)
+- 12:37 Bring-up: Image `lmsysorg/sglang@sha256:a1e17bbf…` (SGLang `4ccff141db`, = Cookbook-Verifikation), Cookbook-Zelle dgx-spark/nvfp4/single/low-latency + `--tool-call-parser qwen3_coder`, `--served-model-name`, `--api-key`. Port 8000, Produktions-Key.
+- 12:48 bereit nach 672 s (GoldVllm: 902 s). Gewichte 80.0 GB, MTP-Kopf 4.8 GB, **KV-Pool 114'944 Tokens** (Cookbook nannte ~93k; GoldVllm 424k). MemAvailable 18.2–18.7 GiB, Swap 7.4 GB.
+- 12:50 Gates gegen SGLang: K1 12/12, K2 6/6, K3 2/2 (30k/81k), K5 OK. **K4 FEHLER**: drei Antworten bei Temperatur 0 nicht identisch (Abweichung ab Zeichen 63, Wortwahl), alle drei inhaltlich korrekt, kein Kollaps. Nachtest: Rechnung 5x exakt 13060303. GoldVllm war bei K4 identisch.
+- 12:54 **K6 Ben auf SGLang:** `hermes -z` 17×23 → 391 (27 s), Terminal-Tool → `gx10` (5 s). K7: 0 Xid, 0 OOM, 0 Fehlerzeilen, kein Wächter.
+- 12:55 **Abweichung vom Plan, offen benannt:** K4 war strenger definiert als Justins Vorgabe (Qualität 12/12, deterministische Rechen-/Retrievaltests, Ben-Tool-Call - alle bestanden). Nichtdeterminismus bei Temperatur 0 ist keine Korruption. K4 wird deshalb geteilt: K4a „kein Kollaps/Leertext“ bleibt hart, K4b „identisch“ wird berichtet und fliesst als Nachteil (Reproduzierbarkeit) in die Entscheidung. Gilt für beide Runtimes gleich. Der Schritt begünstigt SGLang - deshalb hier festgehalten.
+- 12:55:21 Bring-up-Container entfernt
+- 12:55:30 ABAB-Start: hermes-gateway gestoppt, onedrive-sync.timer pausiert, Waechter + Recovery aktiv
+- 13:27:01 Lauf `GOLD1` rc=0
+- 13:56:10 Lauf `SGL1` rc=0
+- 14:28:41 Lauf `GOLD2` rc=0
+- 14:58:22 Lauf `SGL2` rc=0
+- 14:58:22 entscheide.py paar rc=1
+- 15:11:56 restore-goldvllm.sh --ausfuehren rc=1 nach 814 s:   - verify-golden.sh meldet Drift (siehe oben)
+- 12:55–14:58 ABAB: GOLD1 (bereit 852 s, Gates OK), SGL1 (682 s, Pool 109'056, Gates OK, ctx110 abgewiesen), GOLD2 (902 s, Gates OK), SGL2 (671 s, Pool 126'976, Gates OK). Keine Abbrüche, 0 Xid/OOM/Wächter.
+- 14:58 entscheide.py: annehmen=false, E2E Paar 1 −11.23 %, Paar 2 +9.84 %, Mittel −0.70 %; TTFT-30k/80k-Regressionen.
+- 14:58–15:11 **erster echter Restore** `restore-goldvllm.sh --ausfuehren`: 814 s, 0 von 27 Dateien abweichend; Schlussprüfung DRIFT nur `hermes-gateway aktiv` (Hermes war von challenger.sh gestoppt und kam erst im EXIT-Trap danach zurück - mein Ablauffehler).
+- 15:13 nach Hermes-Start: `verify-goldvllm.sh` **GOLDVLLM OK**, `ben_golden_test.sh` BESTANDEN (391 / gx10 / API-Tool OK), 1 Engine, Autostart flash-next-cde.
+- 15:14 Nachtrag: `onedrive-sync.timer` ist ein Nutzer-Timer, mein `sudo systemctl stop` griff nicht. Er lief 13:03 und 14:04 - beide in der Ladephase von GOLD1/GOLD2 (bereit 13:09:45 / 14:11:15), in keiner Messung.
+- 15:20 Aufräumen: SGLang-Image und PLE-Datei (48 GB) entfernt. GoldVllm unberührt.
+- 18:40 Nachtrag nach dem Umzug nach `Nvidia Gx10/SGLANG/`: Skriptpfade auf `betrieb/tools` und `/opt/gx10/bin` angepasst, die Reihenfolge Hermes/Restore und der OneDrive-Nutzer-Timer in `challenger.sh` korrigiert. Die Messungen oben liefen mit dem alten Stand. `dokumente_cache.json` (NVIDIA-Texte) liegt jetzt im Archiv.

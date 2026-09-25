@@ -1,0 +1,124 @@
+{
+ "annehmen": true,
+ "gewinn_paar1_%": 3.95,
+ "gewinn_paar2_%": 6.28,
+ "gewinn_mittel_%": 5.11,
+ "gruende": [],
+ "details_paar1": {
+  "decode_tok_s": {
+   "basis": 22.97,
+   "kandidat": 26.75,
+   "delta_%": 16.5
+  },
+  "ttua_med": {
+   "basis": 1.763,
+   "kandidat": 1.651,
+   "delta_%": -6.4
+  },
+  "ttua_p95": {
+   "basis": 2.373,
+   "kandidat": 2.323,
+   "delta_%": -2.1
+  },
+  "g30_s": {
+   "basis": 74.68,
+   "kandidat": 68.84,
+   "delta_%": -7.8
+  },
+  "agent30_s": {
+   "basis": 30.08,
+   "kandidat": 27.83,
+   "delta_%": -7.5
+  },
+  "agent80_s": {
+   "basis": 52.4,
+   "kandidat": 54.45,
+   "delta_%": 3.9
+  },
+  "ctx30_ttft_kalt": {
+   "basis": 14.595,
+   "kandidat": 14.637,
+   "delta_%": 0.3
+  },
+  "ctx80_ttft_kalt": {
+   "basis": 38.619,
+   "kandidat": 38.812,
+   "delta_%": 0.5
+  },
+  "ctx110_ttft_kalt": {
+   "basis": 56.934,
+   "kandidat": 57.038,
+   "delta_%": 0.2
+  },
+  "acc_len_decode": {
+   "basis": 2.07,
+   "kandidat": 2.17,
+   "delta_%": 4.8
+  },
+  "memavail_min": {
+   "basis": 16266,
+   "kandidat": 15593,
+   "delta_%": -4.1
+  }
+ },
+ "details_paar2": {
+  "decode_tok_s": {
+   "basis": 23.6,
+   "kandidat": 26.27,
+   "delta_%": 11.3
+  },
+  "ttua_med": {
+   "basis": 1.766,
+   "kandidat": 1.57,
+   "delta_%": -11.1
+  },
+  "ttua_p95": {
+   "basis": 2.416,
+   "kandidat": 1.891,
+   "delta_%": -21.7
+  },
+  "g30_s": {
+   "basis": 74.78,
+   "kandidat": 65.53,
+   "delta_%": -12.4
+  },
+  "agent30_s": {
+   "basis": 27.21,
+   "kandidat": 26.46,
+   "delta_%": -2.8
+  },
+  "agent80_s": {
+   "basis": 53.44,
+   "kandidat": 51.62,
+   "delta_%": -3.4
+  },
+  "ctx30_ttft_kalt": {
+   "basis": 14.555,
+   "kandidat": 14.632,
+   "delta_%": 0.5
+  },
+  "ctx80_ttft_kalt": {
+   "basis": 38.667,
+   "kandidat": 38.57,
+   "delta_%": -0.3
+  },
+  "ctx110_ttft_kalt": {
+   "basis": 56.736,
+   "kandidat": 56.977,
+   "delta_%": 0.4
+  },
+  "acc_len_decode": {
+   "basis": 2.08,
+   "kandidat": 2.12,
+   "delta_%": 1.9
+  },
+  "memavail_min": {
+   "basis": 16587,
+   "kandidat": 15912,
+   "delta_%": -4.1
+  }
+ },
+ "warnungen": [
+  "NV_ERR-Einzelmeldungen B2: 1"
+ ]
+}

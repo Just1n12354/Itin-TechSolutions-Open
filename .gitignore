@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.key
+messungen/
+bench/dokumente_cache.json
+bench/*.json
+!bench/qualitaet_v1.json

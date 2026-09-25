@@ -1,0 +1,684 @@
+{
+ "werkzeug": "nacht_bench.py",
+ "label": "CDE2",
+ "url": "http://127.0.0.1:8001",
+ "modell": "qwen3.8-flash-next",
+ "start": "2026-09-25T08:29:28+02:00",
+ "metriken_start": {
+  "vllm:spec_decode_num_drafts_total": 1926.0,
+  "vllm:spec_decode_num_draft_tokens_total": 3852.0,
+  "vllm:spec_decode_num_accepted_tokens_total": 2716.0,
+  "accepted_pos0": 1543.0,
+  "accepted_pos1": 1173.0,
+  "vllm:prefix_cache_queries_total": 675826.0,
+  "vllm:prefix_cache_hits_total": 1600.0,
+  "vllm:num_preemptions_total": 0.0,
+  "vllm:prompt_tokens_total": 675826.0,
+  "vllm:generation_tokens_total": 4649.0
+ },
+ "teile": {
+  "decode": [
+   {
+    "lauf": 0,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.268,
+     "t_reasoning_s": 0.268,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 19.816,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 26.14
+    },
+    "metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 512.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 241.0,
+      "vllm:spec_decode_num_draft_tokens_total": 482.0,
+      "vllm:prefix_cache_queries_total": 88.0,
+      "vllm:prompt_tokens_total": 88.0,
+      "accepted_pos1": 104.0,
+      "accepted_pos0": 167.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 271.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.5622,
+     "mtp_acceptance_length": 2.124,
+     "prefix_hit_rate": 0.0
+    }
+   },
+   {
+    "lauf": 1,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.255,
+     "t_reasoning_s": 0.255,
+     "t_content_s": 7.076,
+     "t_tool_s": null,
+     "dauer_s": 19.278,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 26.86
+    },
+    "metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 512.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 237.0,
+      "vllm:spec_decode_num_draft_tokens_total": 474.0,
+      "vllm:prefix_cache_queries_total": 88.0,
+      "vllm:prompt_tokens_total": 88.0,
+      "accepted_pos1": 107.0,
+      "accepted_pos0": 167.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 274.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.5781,
+     "mtp_acceptance_length": 2.156,
+     "prefix_hit_rate": 0.0
+    }
+   },
+   {
+    "lauf": 2,
+    "ergebnis": {
+     "fehler": null,
+     "t_erstes_token_s": 0.28,
+     "t_reasoning_s": 0.28,
+     "t_content_s": 11.445,
+     "t_tool_s": null,
+     "dauer_s": 19.729,
+     "prompt_tokens": 88,
+     "completion_tokens": 512,
+     "finish_reason": "length",
+     "tool_calls": [],
+     "decode_tok_s": 26.27
+    },
+    "metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 512.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 245.0,
+      "vllm:spec_decode_num_draft_tokens_total": 490.0,
+      "vllm:prefix_cache_queries_total": 88.0,
+      "vllm:prompt_tokens_total": 88.0,
+      "accepted_pos1": 102.0,
+      "accepted_pos0": 166.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 268.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.5469,
+     "mtp_acceptance_length": 2.094,
+     "prefix_hit_rate": 0.0
+    }
+   }
+  ],
+  "ctx": [
+   {
+    "ziel_tokens": 30000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": 14.632,
+     "t_reasoning_s": 14.632,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 23.336,
+     "prompt_tokens": 30448,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 29.29
+    },
+    "kalt_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 108.0,
+      "vllm:spec_decode_num_draft_tokens_total": 216.0,
+      "vllm:prefix_cache_queries_total": 30448.0,
+      "vllm:prompt_tokens_total": 30448.0,
+      "accepted_pos1": 62.0,
+      "accepted_pos0": 86.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 148.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.6852,
+     "mtp_acceptance_length": 2.37,
+     "prefix_hit_rate": 0.0
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": 1.104,
+     "t_reasoning_s": 1.104,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 9.761,
+     "prompt_tokens": 30473,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 29.46
+    },
+    "warm_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 109.0,
+      "vllm:spec_decode_num_draft_tokens_total": 218.0,
+      "vllm:prefix_cache_queries_total": 30473.0,
+      "vllm:prompt_tokens_total": 30473.0,
+      "accepted_pos1": 66.0,
+      "accepted_pos0": 82.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 148.0,
+      "vllm:prefix_cache_hits_total": 28800.0
+     },
+     "mtp_acceptance_rate": 0.6789,
+     "mtp_acceptance_length": 2.358,
+     "prefix_hit_rate": 0.9451
+    }
+   },
+   {
+    "ziel_tokens": 80000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": 38.57,
+     "t_reasoning_s": 38.57,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 47.676,
+     "prompt_tokens": 79534,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 28.0
+    },
+    "kalt_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 114.0,
+      "vllm:spec_decode_num_draft_tokens_total": 228.0,
+      "vllm:prefix_cache_queries_total": 79534.0,
+      "vllm:prompt_tokens_total": 79534.0,
+      "accepted_pos1": 60.0,
+      "accepted_pos0": 81.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 141.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.6184,
+     "mtp_acceptance_length": 2.237,
+     "prefix_hit_rate": 0.0
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": 1.719,
+     "t_reasoning_s": 1.719,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 9.409,
+     "prompt_tokens": 79559,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 33.16
+    },
+    "warm_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 100.0,
+      "vllm:spec_decode_num_draft_tokens_total": 200.0,
+      "vllm:prefix_cache_queries_total": 79559.0,
+      "vllm:prompt_tokens_total": 79559.0,
+      "accepted_pos1": 71.0,
+      "accepted_pos0": 84.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 155.0,
+      "vllm:prefix_cache_hits_total": 76800.0
+     },
+     "mtp_acceptance_rate": 0.775,
+     "mtp_acceptance_length": 2.55,
+     "prefix_hit_rate": 0.9653
+    }
+   },
+   {
+    "ziel_tokens": 110000,
+    "kalt": {
+     "fehler": null,
+     "t_erstes_token_s": 56.977,
+     "t_reasoning_s": 56.977,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 66.307,
+     "prompt_tokens": 115676,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 27.33
+    },
+    "kalt_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 118.0,
+      "vllm:spec_decode_num_draft_tokens_total": 236.0,
+      "vllm:prefix_cache_queries_total": 115676.0,
+      "vllm:prompt_tokens_total": 115676.0,
+      "accepted_pos1": 61.0,
+      "accepted_pos0": 76.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 137.0,
+      "vllm:prefix_cache_hits_total": 0.0
+     },
+     "mtp_acceptance_rate": 0.5805,
+     "mtp_acceptance_length": 2.161,
+     "prefix_hit_rate": 0.0
+    },
+    "warm_turn": {
+     "fehler": null,
+     "t_erstes_token_s": 1.583,
+     "t_reasoning_s": 1.583,
+     "t_content_s": null,
+     "t_tool_s": null,
+     "dauer_s": 9.535,
+     "prompt_tokens": 115701,
+     "completion_tokens": 256,
+     "finish_reason": "length",
+     "content": "",
+     "tool_calls": [],
+     "decode_tok_s": 32.07
+    },
+    "warm_metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 256.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 100.0,
+      "vllm:spec_decode_num_draft_tokens_total": 200.0,
+      "vllm:prefix_cache_queries_total": 115701.0,
+      "vllm:prompt_tokens_total": 115701.0,
+      "accepted_pos1": 72.0,
+      "accepted_pos0": 84.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 156.0,
+      "vllm:prefix_cache_hits_total": 113600.0
+     },
+     "mtp_acceptance_rate": 0.78,
+     "mtp_acceptance_length": 2.56,
+     "prefix_hit_rate": 0.9818
+    }
+   }
+  ],
+  "agentctx": [
+   {
+    "ziel_tokens": 30000,
+    "korrekt": true,
+    "pfade": [
+     "/projekt/a.txt",
+     "/projekt/b.txt",
+     "/projekt/c.txt"
+    ],
+    "ergebnis": "Grössen: /projekt/a.txt = 1200 Bytes, /projekt/b.txt = 3400 Bytes, /projekt/c.txt = 5600 Bytes. Summe = 10200 Bytes.",
+    "schritte": [
+     {
+      "schritt": 0,
+      "ttua_s": 15.012,
+      "dauer_s": 15.634,
+      "prompt_tokens": 30103,
+      "completion_tokens": 66,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/a.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 1,
+      "ttua_s": 2.763,
+      "dauer_s": 3.37,
+      "prompt_tokens": 30157,
+      "completion_tokens": 57,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/b.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 2,
+      "ttua_s": 2.289,
+      "dauer_s": 2.9,
+      "prompt_tokens": 30211,
+      "completion_tokens": 46,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/c.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 3,
+      "ttua_s": 2.733,
+      "dauer_s": 4.55,
+      "prompt_tokens": 30265,
+      "completion_tokens": 108,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "fertig",
+        "args": {
+         "antwort": "Grössen: /projekt/a.txt = 1200 Bytes, /projekt/b.txt = 3400 Bytes, /projekt/c.txt = 5600 Bytes. Summe = 10200 Bytes."
+        }
+       }
+      ],
+      "fehler": null
+     }
+    ],
+    "gesamt_s": 26.46,
+    "ttua_median_s": 2.748,
+    "ttua_warm_median_s": 2.733,
+    "metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 277.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 99.0,
+      "vllm:spec_decode_num_draft_tokens_total": 198.0,
+      "vllm:prefix_cache_queries_total": 120736.0,
+      "vllm:prompt_tokens_total": 120736.0,
+      "accepted_pos1": 87.0,
+      "accepted_pos0": 92.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 179.0,
+      "vllm:prefix_cache_hits_total": 81600.0
+     },
+     "mtp_acceptance_rate": 0.904,
+     "mtp_acceptance_length": 2.808,
+     "prefix_hit_rate": 0.6759
+    }
+   },
+   {
+    "ziel_tokens": 80000,
+    "korrekt": true,
+    "pfade": [
+     "/projekt/a.txt",
+     "/projekt/b.txt",
+     "/projekt/c.txt"
+    ],
+    "ergebnis": "Die Dateigrößen betragen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 1200 + 3400 + 5600 = **10200 Bytes**",
+    "schritte": [
+     {
+      "schritt": 0,
+      "ttua_s": 38.676,
+      "dauer_s": 39.189,
+      "prompt_tokens": 79795,
+      "completion_tokens": 73,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/a.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 1,
+      "ttua_s": 2.7,
+      "dauer_s": 3.286,
+      "prompt_tokens": 79849,
+      "completion_tokens": 53,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/b.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 2,
+      "ttua_s": 3.162,
+      "dauer_s": 3.677,
+      "prompt_tokens": 79903,
+      "completion_tokens": 69,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "datei_groesse",
+        "args": {
+         "pfad": "/projekt/c.txt"
+        }
+       }
+      ],
+      "fehler": null
+     },
+     {
+      "schritt": 3,
+      "ttua_s": 2.934,
+      "dauer_s": 5.464,
+      "prompt_tokens": 79957,
+      "completion_tokens": 134,
+      "finish": "tool_calls",
+      "tools": [
+       {
+        "name": "fertig",
+        "args": {
+         "antwort": "Die Dateigrößen betragen:\n- /projekt/a.txt: 1200 Bytes\n- /projekt/b.txt: 3400 Bytes\n- /projekt/c.txt: 5600 Bytes\n\nSumme: 1200 + 3400 + 5600 = **10200 Bytes**"
+        }
+       }
+      ],
+      "fehler": null
+     }
+    ],
+    "gesamt_s": 51.62,
+    "ttua_median_s": 3.048,
+    "ttua_warm_median_s": 2.934,
+    "metriken": {
+     "roh": {
+      "vllm:generation_tokens_total": 329.0,
+      "vllm:num_preemptions_total": 0.0,
+      "vllm:spec_decode_num_drafts_total": 115.0,
+      "vllm:spec_decode_num_draft_tokens_total": 230.0,
+      "vllm:prefix_cache_queries_total": 319504.0,
+      "vllm:prompt_tokens_total": 319504.0,
+      "accepted_pos1": 103.0,
+      "accepted_pos0": 110.0,
+      "vllm:spec_decode_num_accepted_tokens_total": 213.0,
+      "vllm:prefix_cache_hits_total": 230400.0
+     },
+     "mtp_acceptance_rate": 0.9261,
+     "mtp_acceptance_length": 2.852,
+     "prefix_hit_rate": 0.7211
+    }
+   }
+  ],
+  "qual": {
+   "qset_sha256": "04b36f2428105bccd3d96ba90c8be32d0b401d5b4aa3fd6ed0490f8cab634487",
+   "punkte": 12,
+   "von": 12,
+   "details": [
+    {
+     "id": "T1_wetter",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "wetter",
+       "args": {
+        "ort": "Luzern"
+       }
+      }
+     ],
+     "antwort": "",
+     "ok": true
+    },
+    {
+     "id": "T2_rechner",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "rechner",
+       "args": {
+        "ausdruck": "48193 * 271"
+       }
+      }
+     ],
+     "antwort": "",
+     "ok": true
+    },
+    {
+     "id": "T3_datei",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "datei_groesse",
+       "args": {
+        "pfad": "/srv/daten/bericht_2026.pdf"
+       }
+      }
+     ],
+     "antwort": "",
+     "ok": true
+    },
+    {
+     "id": "T4_kalender",
+     "finish": "tool_calls",
+     "tools": [
+      {
+       "name": "kalender",
+       "args": {
+        "datum": "2026-10-03"
+       }
+      }
+     ],
+     "antwort": "",
+     "ok": true
+    },
+    {
+     "id": "N1_ohne_tool",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\nBern",
+     "ok": true
+    },
+    {
+     "id": "N2_ohne_tool",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n7",
+     "ok": true
+    },
+    {
+     "id": "R1_rechnen",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n430",
+     "ok": true
+    },
+    {
+     "id": "R2_logik",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\nCarla",
+     "ok": true
+    },
+    {
+     "id": "R3_einheiten",
+     "finish": "stop",
+     "tools": [],
+     "antwort": "\n\n86.400 Sekunden (24 × 60 × 60).",
+     "ok": true
+    },
+    {
+     "id": "M1_mehrschritt",
+     "finish": "stop",
+     "aufrufe": [
+      "/a.txt",
+      "/b.txt"
+     ],
+     "antwort": "\n\n/a.txt: 1200 Bytes, /b.txt: 3400 Bytes — Summe: 4600 Bytes.",
+     "wiederholung_max": 1,
+     "ok": true
+    },
+    {
+     "id": "E1_fehler",
+     "finish": "stop",
+     "aufrufe": [
+      "/nicht/da.log"
+     ],
+     "antwort": "\n\nDie Datei `/nicht/da.log` existiert nicht (Fehler: Datei nicht gefunden).",
+     "wiederholung_max": 1,
+     "ok": true
+    },
+    {
+     "id": "Q1_nadel",
+     "finish": "stop",
+     "antwort": "\n\nQX-7741-B",
+     "tools": [],
+     "ok": true
+    }
+   ],
+   "laengen_abbrueche": 0
+  }
+ },
+ "dauer_s": {
+  "decode": 58.9,
+  "ctx": 167.9,
+  "agentctx": 78.4,
+  "qual": 46.6
+ },
+ "metriken_ende": {
+  "vllm:spec_decode_num_drafts_total": 3874.0,
+  "vllm:spec_decode_num_draft_tokens_total": 7748.0,
+  "vllm:spec_decode_num_accepted_tokens_total": 5386.0,
+  "accepted_pos0": 3053.0,
+  "accepted_pos1": 2333.0,
+  "vllm:prefix_cache_queries_total": 1596307.0,
+  "vllm:prefix_cache_hits_total": 532800.0,
+  "vllm:num_preemptions_total": 0.0,
+  "vllm:prompt_tokens_total": 1596307.0,
+  "vllm:generation_tokens_total": 9260.0
+ },
+ "gesamt_metriken": {
+  "roh": {
+   "vllm:generation_tokens_total": 4611.0,
+   "vllm:num_preemptions_total": 0.0,
+   "vllm:spec_decode_num_drafts_total": 1948.0,
+   "vllm:spec_decode_num_draft_tokens_total": 3896.0,
+   "vllm:prefix_cache_queries_total": 920481.0,
+   "vllm:prompt_tokens_total": 920481.0,
+   "accepted_pos1": 1160.0,
+   "accepted_pos0": 1510.0,
+   "vllm:spec_decode_num_accepted_tokens_total": 2670.0,
+   "vllm:prefix_cache_hits_total": 531200.0
+  },
+  "mtp_acceptance_rate": 0.6853,
+  "mtp_acceptance_length": 2.371,
+  "prefix_hit_rate": 0.5771
+ },
+ "ende": "2026-09-25T08:35:19+02:00"
+}

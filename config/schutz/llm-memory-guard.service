@@ -1,0 +1,6 @@
+[Unit]
+Description=LLM memory protection watchdog
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/llm-memory-guard.sh

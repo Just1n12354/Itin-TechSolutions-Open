@@ -1,0 +1,113 @@
+{
+ "annehmen": false,
+ "gewinn_paar1_%": -11.23,
+ "gewinn_paar2_%": 9.84,
+ "gewinn_mittel_%": -0.7,
+ "gruende": [
+  "ctx30_ttft_kalt +20.5 %",
+  "ctx80_ttft_kalt +39.7 %",
+  "ctx80_ttft_kalt +21.3 %"
+ ],
+ "details_paar1": {
+  "decode_tok_s": {
+   "basis": 27.83,
+   "kandidat": 22.68,
+   "delta_%": -18.5
+  },
+  "ttua_med": {
+   "basis": 1.464,
+   "kandidat": 1.309,
+   "delta_%": -10.6
+  },
+  "ttua_p95": {
+   "basis": 1.771,
+   "kandidat": 1.818,
+   "delta_%": 2.7
+  },
+  "g30_s": {
+   "basis": 61.61,
+   "kandidat": 57.01,
+   "delta_%": -7.5
+  },
+  "agent30_s": {
+   "basis": 27.89,
+   "kandidat": 26.87,
+   "delta_%": -3.7
+  },
+  "agent80_s": {
+   "basis": 47.99,
+   "kandidat": 74.08,
+   "delta_%": 54.4
+  },
+  "ctx30_ttft_kalt": {
+   "basis": 12.944,
+   "kandidat": 15.595,
+   "delta_%": 20.5
+  },
+  "ctx80_ttft_kalt": {
+   "basis": 35.539,
+   "kandidat": 49.636,
+   "delta_%": 39.7
+  },
+  "memavail_min": {
+   "basis": 15476,
+   "kandidat": 16177,
+   "delta_%": 4.5
+  }
+ },
+ "details_paar2": {
+  "decode_tok_s": {
+   "basis": 26.96,
+   "kandidat": 23.32,
+   "delta_%": -13.5
+  },
+  "ttua_med": {
+   "basis": 1.477,
+   "kandidat": 1.25,
+   "delta_%": -15.4
+  },
+  "ttua_p95": {
+   "basis": 1.791,
+   "kandidat": 1.63,
+   "delta_%": -9.0
+  },
+  "g30_s": {
+   "basis": 61.79,
+   "kandidat": 55.22,
+   "delta_%": -10.6
+  },
+  "agent30_s": {
+   "basis": 28.96,
+   "kandidat": 24.32,
+   "delta_%": -16.0
+  },
+  "agent80_s": {
+   "basis": 48.75,
+   "kandidat": 47.61,
+   "delta_%": -2.3
+  },
+  "ctx30_ttft_kalt": {
+   "basis": 13.035,
+   "kandidat": 13.691,
+   "delta_%": 5.0
+  },
+  "ctx80_ttft_kalt": {
+   "basis": 35.577,
+   "kandidat": 43.146,
+   "delta_%": 21.3
+  },
+  "ctx110_ttft_kalt": {
+   "basis": 52.242,
+   "kandidat": 60.723,
+   "delta_%": 16.2
+  },
+  "memavail_min": {
+   "basis": 15538,
+   "kandidat": 16246,
+   "delta_%": 4.6
+  }
+ },
+ "warnungen": [
+  "NV_ERR-Einzelmeldungen GOLD1: 1"
+ ]
+}

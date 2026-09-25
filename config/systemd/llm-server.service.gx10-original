@@ -1,0 +1,53 @@
+[Unit]
+Description=Lokaler LLM-Server (GX10 GOLDEN 2026-09 = C_de: vLLM 0.29.0 + DE-Draft-Vokabular, Qwen3.8-Flash-Next) auf 127.0.0.1:8000
+Documentation=file:///home/justin/bin/switch-model.sh
+# docker.service muss laufen, sonst gibt es nichts zu starten.
+Requires=docker.service
+# tailscaled davor, weil vllm-tailscale.socket sonst auf einer IP lauschen
+# soll, die es noch nicht gibt (FreeBind faengt das zwar ab, aber sauberer so).
+After=docker.service nvidia-persistenced.service tailscaled.service network-online.target
+Wants=network-online.target nvidia-persistenced.service
+# Hoechstens 3 Startversuche pro Stunde (zu Restart=on-failure unten).
+StartLimitIntervalSec=3600
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=justin
+Group=justin
+Environment=HOME=/home/justin
+WorkingDirectory=/home/justin
+
+# 1. Liegen die NVIDIA-Kernelmodule fuer den gebooteten Kernel ueberhaupt vor?
+#    Fehlen sie, bricht der nvidia-container-Prestart-Hook mit
+#    "nvml error: driver not loaded" ab - und ein Container mit Restart-Policy
+#    liefe endlos in diesen Fehler. Lieber hier laut scheitern.
+# "+" = mit vollen Rechten ausfuehren, trotz User=justin. Der Waechter schreibt
+# seine Warnung nach /var/lib/nvidia-module-guard/motd, das gehoert root.
+ExecStartPre=+/usr/local/sbin/nvidia-module-guard
+
+# 2. Der Treiber braucht nach dem Boot ein paar Sekunden, bis nvidia-smi
+#    antwortet. Bis zu 60 s warten statt sofort aufzugeben.
+ExecStartPre=/bin/sh -c 'for i in $(seq 1 30); do nvidia-smi -L >/dev/null 2>&1 && exit 0; sleep 2; done; echo "nvidia-smi antwortet nach 60 s nicht" >&2; exit 1'
+
+# 3. Modell starten und warten, bis /v1/models mit HTTP 200 antwortet.
+#    Seit 22.09.2026 Produktion B (flash-next-b). Rueckweg zu A: gx10/tools/rollback_vllm.sh
+#    switch-model.sh kehrt erst zurueck, wenn der Server wirklich bereit ist.
+ExecStart=/home/justin/bin/switch-model.sh flash-next-cde
+
+ExecStop=/usr/bin/docker stop -t 60 qwen38-flash
+
+# Kaltstart liest ueber 100 GB von der NVMe und kompiliert CUDA-Graphen:
+# gut 15 Minuten sind normal, 40 Minuten sind die Reissleine.
+TimeoutStartSec=2400
+TimeoutStopSec=120
+
+# Wiederholung beim Booten: schlaegt der Start fehl (Treiber noch nicht bereit, Port belegt,
+# CIFS-Automount haengt), bleibt Ben sonst bis zum naechsten Handgriff weg. Hoechstens 3 Versuche
+# pro Stunde - ein Ladeversuch dauert rund 13 min, eine Schleife waere teurer als der Ausfall.
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target

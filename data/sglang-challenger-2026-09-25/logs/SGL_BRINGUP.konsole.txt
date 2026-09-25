@@ -1,0 +1,6 @@
+12:37:35 Start SGL_BRINGUP: SGLang image=lmsysorg/sglang@sha256:a1e17bbf0e9618364dc6395a4de5f9c3e8dfc9f43d603995b7a6aebc83de6e06 MemAvailable=120013MiB
+12:37:37 normalisiert: drop_caches (Swap 3352 MiB bleibt) -> MemAvailable 120284 MiB
+12:37:37 PLE-Verzeichnis geleert: /home/justin/gx10-sglang-0925/ple (frei  2,8T)
+12:48:50 bereit nach 672s; [2026-09-25 10:46:21] Load weight end. elapsed=497.71 s, type=Qwen4ExpForConditionalGeneration, quant=modelopt_fp4, quant_algo=NVFP4, avail mem=33.41 GB, mem usage=80.00 GB. [2026-09-25 10:47:49] Load weight end. elapsed=84.55 s, type=Qwen4ExpForCausalLMMTP, quant=modelopt_fp4, quant_algo=NVFP4, avail mem=28.39 GB, mem usage=4.77 GB. [2026-09-25 10:47:52] KV Cache is allocated. dtype: torch.bfloat16, #tokens: 114944, K size: 1.32 GB, V size: 1.32 GB [2026-09-25 10:47:52] KV Cache is allocated. dtype: torch.bfloat16, #tokens: 114944, K size: 0.11 GB, V size: 0.11 GB [2026-09-25 10:48:37] max_total_num_tokens=114944, chunked_prefill_size=4096, max_prefill_tokens=16384, max_running_requests=8, context_len=262144, available_gpu_mem=19.52 GB 
+12:48:50 NUR_START gesetzt - keine Messung
+12:48:54 BEHALTEN=1: Container bench-sgl-bringup bleibt stehen

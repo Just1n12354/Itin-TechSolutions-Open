@@ -1,0 +1,52 @@
+Zeit: 2026-09-25T08:51:52+02:00   Uptime: up 1 day, 14 hours, 18 minutes
+== B
+OK        System entspricht B
+Revision:       snapshots/7b719225
+max-model-len:  262144
+max-num-seqs:   16
+kv-cache-memory-bytes:12884901888
+kv-cache-dtype: auto
+MTP:            num_speculative_tokens":2
+Prefix-Cache:   1
+Container:      running=true restarts=0 policy=no seit=2026-09-25T06:36:40.760596169Z
+== API
+health 200
+models ohne Key 401
+models mit Key 200
+Tailnet <TAILNET-IP>:8000 mit Key 200
+xiaozhi -> 172.17.0.1:8000 ohne Key 401
+xiaozhi -> /health 200
+== Ben/Hermes
+active active
+letzte Hermes-Aktivitaet 2026-09-24 07:04:41.255760
+== Fehler seit Boot
+Xid: 0  NV_ERR: 2  OOM-Kill: 0  Waechter-Stopps: 0
+== Dienste
+llm-server                 active
+llm-memory-guard.timer     active
+llm-recovery.timer         active
+vllm-docker.socket         active
+vllm-tailscale.socket      active
+user vllm-metriklog.timer  active
+user onedrive-sync.timer   active
+user onedrive              inactive / masked
+user aetheria-minecraft    inactive / disabled
+Zustand:        NORMAL
+Fri 2026-09-25 09:01:25 CEST 9min Fri 2026-09-25 08:50:22 CEST 1min 31s ago onedrive-sync.timer onedrive-sync.service
+Result=success ExecMainExitTimestamp=Fri 2026-09-25 08:50:48 CEST ExecMainStatus=0
+letzte Metrikzeile: 2026-09-25T08:51:41	ok
+== Aetheria-Daten
+2026-09-24_07:57:06 /home/justin/.local/share/aetheria-v3/Benchmark/Lauf/Lauf11/minecraft/welt/level.dat
+2026-09-24_07:57:06 /home/justin/.local/share/aetheria-v3/Benchmark/Lauf/Lauf11/stand.json
+Lauf11-Archive: SHA256 OK
+== Tailnet
+https://<TAILNET-NAME>/ 502 0.039633s
+https://<TAILNET-NAME>:8445/ 200 0.048378s
+https://<TAILNET-NAME>:8446/ 000 0.001411s
+https://<TAILNET-NAME>:8446/ keine Verbindung
+https://<TAILNET-NAME>:8447/ 200 0.477500s
+https://<TAILNET-NAME>:8448/ 200 0.141354s
+== Speicher (6 Proben / 10 s)
+19246 19237 19230 19223 19219 19216 MiB (Watchdog 8259)
+Swap belegt 6933 MiB
+41, 10.09 W, 0x0000000000000000

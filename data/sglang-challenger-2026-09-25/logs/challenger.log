@@ -1,0 +1,6 @@
+12:55:30 === GOLD1 (kandidat.sh gx10-vllm:goldvllm DRAFT_VOCAB=/home/justin/gx10-nightrun/draftvocab/draft_vocab_de_65536.npy)
+13:27:01 === SGL1 (kandidat_sglang.sh )
+13:56:10 === GOLD2 (kandidat.sh gx10-vllm:goldvllm DRAFT_VOCAB=/home/justin/gx10-nightrun/draftvocab/draft_vocab_de_65536.npy)
+14:28:41 === SGL2 (kandidat_sglang.sh )
+14:58:22 Restore GoldVllm
+15:11:56 fertig

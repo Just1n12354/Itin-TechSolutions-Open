@@ -1,0 +1,38 @@
+{
+ "P1": [
+  {
+   "tok": 400,
+   "decode_tok_s": 26.58,
+   "majfault": 7630,
+   "nvme_mib": 32.4,
+   "majfault_je_token": 19.1,
+   "text_hash": 1156871159
+  },
+  {
+   "tok": 400,
+   "decode_tok_s": 30.9,
+   "majfault": 13,
+   "nvme_mib": 0.1,
+   "majfault_je_token": 0.0,
+   "text_hash": 1156871159
+  },
+  {
+   "tok": 400,
+   "decode_tok_s": 30.94,
+   "majfault": 33,
+   "nvme_mib": 0.7,
+   "majfault_je_token": 0.1,
+   "text_hash": 1156871159
+  }
+ ],
+ "P2_kontrolle": [
+  {
+   "tok": 400,
+   "decode_tok_s": 26.16,
+   "majfault": 7005,
+   "nvme_mib": 27.4,
+   "majfault_je_token": 17.5,
+   "text_hash": 175629759
+  }
+ ]
+}

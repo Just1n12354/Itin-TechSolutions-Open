@@ -1,0 +1,96 @@
+{
+ "label": "GOLD2",
+ "zeit": "2026-09-25T14:16:22",
+ "K1": {
+  "ok": true,
+  "punkte": 12,
+  "von": 12,
+  "qset_sha256": "04b36f2428105bccd3d96ba90c8be32d0b401d5b4aa3fd6ed0490f8cab634487",
+  "fehler": []
+ },
+ "K2": {
+  "ok": true,
+  "details": [
+   {
+    "aufgabe": "48193 * 271",
+    "soll": "13060303",
+    "antwort": "\n\n13060303",
+    "ok": true
+   },
+   {
+    "aufgabe": "987654 - 123789",
+    "soll": "863865",
+    "antwort": "\n\n863865",
+    "ok": true
+   },
+   {
+    "aufgabe": "7 * 8 * 9 * 11",
+    "soll": "5544",
+    "antwort": "\n\n5544",
+    "ok": true
+   },
+   {
+    "aufgabe": "144144 / 12",
+    "soll": "12012",
+    "antwort": "\n\n12012",
+    "ok": true
+   },
+   {
+    "aufgabe": "2 hoch 20",
+    "soll": "1048576",
+    "antwort": "\n\n1048576",
+    "ok": true
+   },
+   {
+    "aufgabe": "35 + 47 + 58 + 91 + 19",
+    "soll": "250",
+    "antwort": "\n\n250",
+    "ok": true
+   }
+  ]
+ },
+ "K3": {
+  "ok": true,
+  "details": [
+   {
+    "kontext": 30000,
+    "prompt_tokens": 30287,
+    "soll": "GX-30K-7Q4M-2291",
+    "antwort": "\n\nGX-30K-7Q4M-2291",
+    "fehler": null,
+    "ok": true
+   },
+   {
+    "kontext": 80000,
+    "prompt_tokens": 81012,
+    "soll": "GX-80K-3F8T-6604",
+    "antwort": "\n\nGX-80K-3F8T-6604",
+    "fehler": null,
+    "ok": true
+   }
+  ]
+ },
+ "K4": {
+  "ok": true,
+  "identisch": true,
+  "kollaps": [
+   false,
+   false,
+   false
+  ],
+  "antwort": "1. Der Fehlerstromschutzschalter überwacht kontinuierlich die Stromstärke, die über den Hin- und Rückleiter fließt.\n2. Im Normalbetrieb sind die Ströme in beiden Leitern betragsmäßig gleich, sodass sich ihre magnetischen Felder im Kern aufheben.\n3. Fließt Strom über einen unerwünschten Pfad, etwa du"
+ },
+ "K5": {
+  "ok": true,
+  "tools": [
+   {
+    "name": "lagerbestand",
+    "args": {
+     "artikel": "FI-Schalter 40A/30mA"
+    }
+   }
+  ],
+  "antwort": "\n\n37 Stück."
+ },
+ "ok": true
+}

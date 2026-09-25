@@ -1,0 +1,10 @@
+[Unit]
+Description=LLM-Recovery jede Minute pruefen
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=60s
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target
