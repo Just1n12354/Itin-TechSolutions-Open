@@ -1,0 +1,5 @@
+# Erzeugte Binaer- und Vektordateien nie als Text behandeln (CRLF zerstoert PDF-/Length)
+*.pdf binary
+*.npy binary
+*.ai  binary
+*.eps binary

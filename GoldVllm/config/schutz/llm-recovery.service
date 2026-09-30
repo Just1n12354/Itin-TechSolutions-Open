@@ -1,6 +1,6 @@
 [Unit]
 Description=LLM-Recovery: vLLM nach einem Stopp durch llm-memory-guard kontrolliert zurueckholen
-Documentation=https://github.com/Just1n12354/GoldVllm/blob/main/de/BETRIEB.md
+Documentation=https://github.com/Just1n12354/Itin-TechSolutions-Open/blob/main/GoldVllm/de/BETRIEB.md
 After=docker.service llm-server.service
 
 [Service]
