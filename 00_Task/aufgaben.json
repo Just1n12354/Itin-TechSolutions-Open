@@ -97,7 +97,7 @@
       "prio": "mittel",
       "was": "Die Historie wurde am 02.10.2026 neu geschrieben (Betreff 'Datum: Was' plus 'Grund:'), alle Commit-Kennungen haben sich geaendert. Auf jedem Geraet pruefen, ob ein Klon existiert; wenn ja und ohne eigene Commits: git fetch && git reset --hard origin/main. Eigene Commits vorher sichern und auf den neuen Stand uebertragen. Zuordnung alt -> neu: Bericht/Historie-Zuordnung-2026-10-02.txt.",
       "warum": "Ein Klon mit alter Historie wuerde beim naechsten Pull einen Merge der alten und neuen Kette erzeugen und beim Push die alte Historie zurueckbringen. Der Autosync auf JUSTMAIN macht pull --rebase automatisch.",
-      "quelle": "Eigener Befund 02.10.2026: tailscale status meldet alle drei offline (justlaptop seit 13 h, sarahpc seit 4 Tagen, mac4air seit 24 Tagen).",
+      "quelle": "Eigener Befund 02.10.2026: tailscale status meldet alle drei offline (justlaptop seit 13 h, sarahpc seit 4 Tagen, mac4air seit 24 Tagen). gx10 und macmini waren sauber ohne eigene Commits und stehen nach fetch + reset --hard auf dem neuen main (02.10.2026).",
       "erfasst": "2026-10-02"
     }
   ]
