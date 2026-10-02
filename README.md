@@ -15,6 +15,8 @@ oder widerlegen koennen.
 | [`GoldVllm/`](GoldVllm/) | vLLM 0.29 mit `RadixArk/Qwen3.8-Flash-Next-NVFP4` und vollem Kontext (262'144 Tokens) auf einem GB10, 24/7 als Backend eines Agenten. Image-Rezept, Startzeile, systemd-Units, RAM-Waechter, Benchmark-Kit, Rohdaten, SGLang-Vergleich. | **fertig, eingefroren** (Stand 25.09.2026) |
 | [`Hermes Ben/`](Hermes%20Ben/) | Lokaler autonomer Assistent auf dem GX10. | **noch nicht fertig**, noch nicht veroeffentlicht |
 | [`Ziel/`](Ziel/) | Roadmap-Notizen. | Arbeitsnotiz |
+| [`00_Task/`](00_Task/) | Offene und erledigte Aufgaben dieses Repos (`aufgaben.json`, daraus `Aufgaben.pdf`). | gepflegt |
+| [`werkzeuge/`](werkzeuge/) | `repo_pruefen.py`: Geheimnisse, eigene Pfade, Binaer-Attribute, tote Links, Aufgaben - vor jedem Commit. | - |
 
 ## Wo anfangen
 

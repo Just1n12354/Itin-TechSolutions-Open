@@ -1,0 +1,91 @@
+{
+  "_zweck": "Was in diesem Repo zu tun ist. Von Hand pflegbar, einzige Quelle fuer offene Arbeit in Itin-TechSolutions-Open.",
+  "_felder": "id eindeutig im Repo · status offen|laeuft|erledigt · prio hoch|mittel|tief · projekt = Ordner im Repo · quelle = woher die Aufgabe stammt, damit sie nachpruefbar bleibt · erledigt = Datum oder null, wenn nur der Status belegt ist · nachweis = Pflicht bei status erledigt",
+  "_hinweis": "Das Repo ist oeffentlich. Hier steht nur, was auch oeffentlich stehen darf: keine Zugangsdaten, keine privaten Pfade, keine Kundennamen.",
+  "repo": "Itin-TechSolutions-Open",
+  "worum": "Offene Projekte rund um lokale KI auf einem NVIDIA GB10.",
+  "stand": "2026-10-02",
+  "aufgaben": [
+    {
+      "id": "ITO-01",
+      "titel": "Binaer-Attribute fuer PDF und npy wirksam machen",
+      "projekt": "Repo",
+      "status": "erledigt",
+      "prio": "mittel",
+      "was": "Die Wurzel-.gitattributes markierte *.pdf und *.npy als binary, aber GoldVllm/.gitattributes mit '* text=auto' lag tiefer und hat das fuer alle Dateien unter GoldVllm/ ueberstimmt. Beide Dateien zu einer in der Wurzel zusammengefuehrt, Shell-Skripte und systemd-Units zusaetzlich auf eol=lf.",
+      "warum": "Mit core.autocrlf=true kann ein als Text behandeltes PDF beim Checkout zerstoert werden. Die Regel aus dem Commit vom 30.09.2026 sah wirksam aus, war es aber nicht.",
+      "quelle": "Eigener Befund 02.10.2026: git ls-files --eol zeigte attr/text=auto fuer beide Anleitungs-PDFs und draft_vocab_de_65536.npy.",
+      "erfasst": "2026-10-02",
+      "erledigt": "2026-10-02",
+      "nachweis": "git check-attr text -- GoldVllm/Anleitung/AI/GoldVllm_Anleitung_KI.pdf GoldVllm/draftvocab/draft_vocab_de_65536.npy meldet 'unset' (vorher 'auto'). werkzeuge/repo_pruefen.py prueft das fuer alle PDF und npy; Gegenprobe mit wieder angelegter GoldVllm/.gitattributes schlaegt an. git add --renormalize aenderte keinen Dateiinhalt."
+    },
+    {
+      "id": "ITO-02",
+      "titel": "Aufrufzeilen der Bench-Skripte auf bench/ korrigiert",
+      "projekt": "GoldVllm",
+      "status": "erledigt",
+      "prio": "tief",
+      "was": "benchmark_gx10.py, aufwaermen.py und nacht_bench.py nannten in ihrer Bedienungsanleitung den Pfad tools/..., die Skripte liegen aber unter bench/. Dazu zwei ungenutzte 'import sys' entfernt (ruff F401). Die Kopien unter GoldVllm/data/ sind Rohdaten-Archiv und bleiben unveraendert.",
+      "warum": "Wer die Zeile aus dem Kopf der Datei kopiert, bekommt 'No such file'.",
+      "quelle": "Eigener Befund 02.10.2026 (Suche nach 'tools/' und ruff --select F,B,E9,PLE).",
+      "erfasst": "2026-10-02",
+      "erledigt": "2026-10-02",
+      "nachweis": "ruff check --select F,B,E9,PLE: vorher 4 Meldungen, nachher 2 (B905 und B023 in benchmark_gx10.py, beide geprueft und kein Fehler: zip schneidet bewusst ab, die Threads werden in derselben Runde gejoint). grep 'tools/' in GoldVllm/bench/ findet nichts mehr."
+    },
+    {
+      "id": "ITO-03",
+      "titel": "Hermes Ben fertigstellen und veroeffentlichen",
+      "projekt": "Hermes Ben",
+      "status": "offen",
+      "prio": "mittel",
+      "was": "Der Ordner enthaelt nur einen Platzhalter. Veroeffentlichen, sobald Ben v1 erreicht ist. Die acht Kriterien fuer 'Ben v1' stehen in Ziel/Readme.txt (7 Tage echte autonome Arbeit, keine systematischen False Success, Recovery, belegtes Memory, Hermes/OpenCode ueber Ben Core, Pause/Resume, Freigaben, Backup/Restore/Neuinstallation). Vor der Veroeffentlichung: keine privaten Daten, keine Secrets, keine persoenlichen Pfade, Beispielconfig, Lizenz.",
+      "warum": "README.md fuehrt Hermes Ben als 'noch nicht fertig, noch nicht veroeffentlicht'.",
+      "quelle": "README.md (Tabelle Projekte), Hermes Ben/README.md, Ziel/Readme.txt Abschnitt 'Phase 6' und 'Meine Definition von Ben ist fertig'.",
+      "erfasst": "2026-10-02"
+    },
+    {
+      "id": "ITO-04",
+      "titel": "Ziel/Readme.txt: oeffentlich lassen oder aufbereiten",
+      "projekt": "Ziel",
+      "status": "offen",
+      "prio": "tief",
+      "was": "Die Datei ist eine Chat-Antwort im Wortlaut ('Ja, fuer Ben ... wuerde ich jetzt', 'Nach deinem jetzigen Stand'), mit geschaetzten Fortschrittsprozenten. Entscheiden: so oeffentlich lassen, als Roadmap fuer Hermes Ben aufbereiten (z. B. Hermes Ben/ROADMAP.md) oder aus dem oeffentlichen Repo nehmen. Nicht von selbst aendern - das ist Justins Entscheidung.",
+      "warum": "Das Repo ist oeffentlich und sonst sorgfaeltig redigiert; diese Datei faellt im Ton heraus und widerspricht zum Teil den offenen Hebeln in GoldVllm (siehe ITO-06).",
+      "quelle": "Eigener Befund 02.10.2026 beim Lesen von Ziel/Readme.txt (Commit 'Reorg' vom 30.09.2026).",
+      "erfasst": "2026-10-02"
+    },
+    {
+      "id": "ITO-05",
+      "titel": "GoldVllm: Betriebsnachtraege seit dem Einfrieren pruefen",
+      "projekt": "GoldVllm",
+      "status": "offen",
+      "prio": "tief",
+      "was": "Auf dem GX10 sind seit dem eingefrorenen Stand vom 25.09.2026 weitere Schutz-Units dazugekommen, die nicht im Repo stehen: llm-bootstart-waechter.service/.timer, die Drop-ins llm-server.service.d/20-startdatei-heilen.conf und vllm-*.socket.d/10-keine-bootschleife.conf (alle 28.09.2026) sowie nvidia-module-guard. Entscheiden, ob sie als Nachtrag in GoldVllm/config/ gehoeren (generisch, ohne Geraetepfade) oder bewusst geraetespezifisch bleiben.",
+      "warum": "Die Units decken Boot-Ausfaelle ab (fehlende NVIDIA-Module nach Kernel-Update, Bootschleife der Sockets). Wer GoldVllm nachbaut, trifft auf dieselben Fehler.",
+      "quelle": "Eigener Befund 02.10.2026: ls /etc/systemd/system und systemctl list-units auf dem GX10 gegen GoldVllm/config/systemd und config/schutz.",
+      "erfasst": "2026-10-02"
+    },
+    {
+      "id": "ITO-06",
+      "titel": "GoldVllm: offene Tuning-Hebel nur bei realem Anlass messen",
+      "projekt": "GoldVllm",
+      "status": "offen",
+      "prio": "tief",
+      "was": "Drei Hebel sind nie einzeln gemessen: eigenes Draft-Vokabular fuer nicht-deutsche Arbeitslasten; --enable-chunked-prefill / --max-num-batched-tokens 8192 und VLLM_PLE_MMAP_PREWARM; vLLM 0.30 als Herausforderer nach Anleitung Abschnitt 7. Nur angehen, wenn eine reale Aufgabe davon profitiert.",
+      "warum": "Ziel/Readme.txt nimmt 'vLLM noch 1 % schneller machen' ausdruecklich von der Roadmap. Die Hebel stehen hier, damit sie nicht verloren gehen, nicht als Auftrag.",
+      "quelle": "GoldVllm/Anleitung/AI/GoldVllm_Anleitung_KI.md Abschnitt 6.5 'Offene Hebel (nur mit Messung)'; GoldVllm/README.md 'Honest limits' (Patch-Repo auf vLLM 0.30).",
+      "erfasst": "2026-10-02"
+    },
+    {
+      "id": "ITO-07",
+      "titel": "Klone auf mac4air, sarahpc und justlaptop nachziehen",
+      "projekt": "Repo",
+      "status": "offen",
+      "prio": "mittel",
+      "was": "Die Historie wird am 02.10.2026 neu geschrieben (Betreff 'Datum: Was' plus 'Grund:'), danach aendern sich alle Commit-Kennungen. Auf jedem Geraet pruefen, ob ein Klon existiert; wenn ja und ohne eigene Commits: git fetch && git reset --hard origin/main. Eigene Commits vorher sichern und auf den neuen Stand uebertragen.",
+      "warum": "Ein Klon mit alter Historie wuerde beim naechsten Pull einen Merge der alten und neuen Kette erzeugen und beim Push die alte Historie zurueckbringen. Der Autosync auf JUSTMAIN macht pull --rebase automatisch.",
+      "quelle": "Eigener Befund 02.10.2026: tailscale status meldet alle drei offline (justlaptop seit 13 h, sarahpc seit 4 Tagen, mac4air seit 24 Tagen).",
+      "erfasst": "2026-10-02"
+    }
+  ]
+}
