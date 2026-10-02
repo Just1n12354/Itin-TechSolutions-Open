@@ -71,12 +71,14 @@
       "id": "ITO-05",
       "titel": "GoldVllm: Betriebsnachtraege seit dem Einfrieren pruefen",
       "projekt": "GoldVllm",
-      "status": "offen",
+      "status": "erledigt",
       "prio": "tief",
       "was": "Auf dem GX10 sind seit dem eingefrorenen Stand vom 25.09.2026 weitere Schutz-Units dazugekommen, die nicht im Repo stehen: llm-bootstart-waechter.service/.timer, die Drop-ins llm-server.service.d/20-startdatei-heilen.conf und vllm-*.socket.d/10-keine-bootschleife.conf (alle 28.09.2026) sowie nvidia-module-guard. Entscheiden, ob sie als Nachtrag in GoldVllm/config/ gehoeren (generisch, ohne Geraetepfade) oder bewusst geraetespezifisch bleiben.",
       "warum": "Die Units decken Boot-Ausfaelle ab (fehlende NVIDIA-Module nach Kernel-Update, Bootschleife der Sockets). Wer GoldVllm nachbaut, trifft auf dieselben Fehler.",
       "quelle": "Eigener Befund 02.10.2026: ls /etc/systemd/system und systemctl list-units auf dem GX10 gegen GoldVllm/config/systemd und config/schutz.",
-      "erfasst": "2026-10-02"
+      "erfasst": "2026-10-02",
+      "erledigt": "2026-10-02",
+      "nachweis": "Entschieden (Claude, 02.10.2026): Der Socket-Drop-in 10-keine-bootschleife.conf behebt einen Fehler der GoldVllm-eigenen vllm-tailscale.socket (Ordnungsschleife beim Boot) und ist generisch -> als GoldVllm/config/systemd/vllm-tailscale.socket.d/10-keine-bootschleife.conf aufgenommen, README-Tabelle ergaenzt. Bewusst geraetespezifisch und nicht im Repo: llm-bootstart-waechter (.service/.timer), 20-startdatei-heilen.conf und nvidia-module-guard - sie rufen eigene Skripte unter /usr/local/sbin auf bzw. betreffen das GB10-Kernelproblem. vllm-docker.socket gehoert nicht zu GoldVllm."
     },
     {
       "id": "ITO-06",

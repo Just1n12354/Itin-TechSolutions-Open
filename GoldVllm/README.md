@@ -67,7 +67,7 @@ Then install the RAM watchdog before running it 24/7: [docs/OPERATIONS.md](docs/
 |---|---|
 | `AI_AGENT_GUIDE.md` | rules and step order for an AI assistant installing or tuning this on a GB10 |
 | `docs/` | INSTALL, CONFIGURATION (every flag and env var, with sources), OPERATIONS, BENCHMARKING, RESULTS, LESSONS, SGLANG |
-| `config/` | `run-goldvllm.sh`, systemd units, RAM watchdog, recovery, the `serve.sh` patch |
+| `config/` | `run-goldvllm.sh`, systemd units, RAM watchdog, recovery, the `serve.sh` patch; `systemd/vllm-tailscale.socket.d/` fixes a boot ordering cycle (added 2026-10-02) |
 | `draftvocab/` | the German draft vocabulary (SHA256 `a8647394…`) and how to build your own |
 | `build/` | how our image was actually built (1-container transcript of `Dockerfile.v0.29`) |
 | `bench/` | benchmark and correctness kit (G30, agent 30k/80k, TTFT, quality set, gates, samplers, ABAB decision) |
