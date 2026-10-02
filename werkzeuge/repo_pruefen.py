@@ -13,7 +13,8 @@ Das Repo ist oeffentlich. Geprueft wird genau das, was Git committen wuerde
   4. Binaer         *.pdf und *.npy muessen 'binary' sein - bis 02.10.2026
                     hat eine zweite .gitattributes das still ausgehebelt
   5. Links          relative Markdown-Links, die ins Leere zeigen
-  6. Aufgaben       00_Task/pdf_erzeugen.py --pruefen (Inhalt der JSON und
+  6. Ausfuehrbar    jedes getrackte *.sh hat im Index den Modus 100755
+  7. Aufgaben      00_Task/pdf_erzeugen.py --pruefen (Inhalt der JSON und
                     ob Aufgaben.pdf zur JSON passt)
 
 Exit 0 = sauber, 1 = Fehler gefunden.
@@ -103,6 +104,14 @@ def pruefe_binaer(liste, fehler):
             fehler.append(f"{pfad}: wird als Text behandelt (text={wert}), muss binary sein")
 
 
+def pruefe_ausfuehrbar(fehler):
+    # Der Reorg vom 30.09.2026 lief ueber Windows und hat 18 Skripten das
+    # Ausfuehrungsrecht genommen; Windows zeigt das nicht, Linux schon.
+    for eintrag in git("ls-files", "-s", "-z", "--", "*.sh").decode("utf-8").split("\0"):
+        if eintrag and not eintrag.startswith("100755"):
+            fehler.append(f"{eintrag.split(chr(9))[-1]}: nicht ausfuehrbar - git update-index --chmod=+x")
+
+
 def pruefe_aufgaben(fehler):
     skript = ROOT / "00_Task" / "pdf_erzeugen.py"
     r = subprocess.run([sys.executable, "-B", str(skript), "--pruefen"],
@@ -121,6 +130,7 @@ def main():
                 fehler.append(f"{rel}: verbotener Dateiname ({name})")
         pruefe_text(rel, fehler)
     pruefe_binaer(liste, fehler)
+    pruefe_ausfuehrbar(fehler)
     pruefe_aufgaben(fehler)
     if any(r.startswith("V1/") for r in liste):
         fehler.append("V1/ wuerde committet - gehoert in .gitignore")

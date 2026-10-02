@@ -33,6 +33,19 @@
       "nachweis": "ruff check --select F,B,E9,PLE: vorher 4 Meldungen, nachher 2 (B905 und B023 in benchmark_gx10.py, beide geprueft und kein Fehler: zip schneidet bewusst ab, die Threads werden in derselben Runde gejoint). grep 'tools/' in GoldVllm/bench/ findet nichts mehr."
     },
     {
+      "id": "ITO-08",
+      "titel": "Ausfuehrungsrecht der Skripte wiederhergestellt",
+      "projekt": "GoldVllm",
+      "status": "erledigt",
+      "prio": "mittel",
+      "was": "Der Commit 'Reorg' vom 30.09.2026 hat 18 Skripten das Ausfuehrungsrecht genommen (100755 -> 100644), darunter llm-recovery.sh, llm-memory-guard.sh und build/baue_b_inner.sh. Alle 18 wieder auf 100755, dazu config/run-goldvllm.sh, das die Doku fuenfmal als ./config/run-goldvllm.sh aufruft, das aber nie ausfuehrbar war.",
+      "warum": "Wer frisch auf Linux klont und der Anleitung folgt, bekommt 'Permission denied'. Unter Windows sieht man den Fehler nicht.",
+      "quelle": "Eigener Befund 02.10.2026 beim Lesen der Historie: git diff-tree auf dem Reorg-Commit vom 30.09.2026 listet die 18 Moduswechsel.",
+      "erfasst": "2026-10-02",
+      "erledigt": "2026-10-02",
+      "nachweis": "git ls-files -s zeigt 19 Dateien mit 100755 (vorher 0). werkzeuge/repo_pruefen.py prueft jedes *.sh auf 100755."
+    },
+    {
       "id": "ITO-03",
       "titel": "Hermes Ben fertigstellen und veroeffentlichen",
       "projekt": "Hermes Ben",
