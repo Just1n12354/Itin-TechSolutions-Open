@@ -1,0 +1,35 @@
+Historie-Zuordnung Itin-TechSolutions-Open, 02.10.2026
+
+Die Historie wurde am 02.10.2026 neu geschrieben: jeder Betreff im Format
+'JJJJ-MM-TT: Was', darunter 'Grund:'; der alte Betreff steht als 'Vorher:' in
+der Nachricht. Tree, Autor, Committer und beide Zeitstempel sind unveraendert,
+nur die Kennungen haben sich geaendert. Sicherung der alten Historie:
+Downloads\Itin-TechSolutions-Open\Itin-TechSolutions-Open-Historie-alt_2026-10-02.bundle
+auf JUSTMAIN (git bundle verify: vollstaendig, HEAD 228162e).
+
+alt      neu      Datum       Betreff vorher
+-------  -------  ----------  --------------
+69cd205  f7558af  2026-09-25  Initial commit
+b4dfc41  3bdeffd  2026-09-25  GoldVllm: vLLM 0.29 + Qwen3.8-Flash-Next-NVFP4 on a single GB10 - guide, config, kit, data
+50ba40d  595b9d3  2026-09-25  docs: restore ran against restore point revision 1 (27 files)
+1ce9f7d  425a873  2026-09-25  Create GoldVllm_Anleitung.md
+bf33fcc  b623828  2026-09-25  docs: Anleitung fuer Menschen und KI (MD + PDF), generische Recovery
+ab43d9d  d35e528  2026-09-26  chore(sync): auto-commit JustMain 2026-09-26 13:30
+e44d897  3656235  2026-09-30  Reorg
+96519d1  74f1560  2026-09-30  Stamm-README, Hermes Ben als 'noch nicht fertig', Binaer-Attribute, Link auf neues Repo
+cffc65c  645741e  2026-10-02  2026-10-02: V2 - Binaer-Attribute wirksam, Bench-Aufrufe korrigiert, V1/ ignoriert
+8690710  767f02c  2026-10-02  2026-10-02: 00_Task angelegt, Pruefskript fuer das oeffentliche Repo
+228162e  c6662f5  2026-10-02  2026-10-02: Ausfuehrungsrecht von 19 Skripten wiederhergestellt
+
+Volle Kennungen (alt -> neu):
+69cd205995d01b34a6906406eb2842804e992563 -> f7558afcfcd946e576f1e2fb5ea8179dd399bdba
+b4dfc41c64936dbb40ec7f1ad5a2c8f6dfaf5b2e -> 3bdeffd2845162bc793e991c1f9eccafda210dab
+50ba40d6577bb5acb8e1bc59ff507567a9e501c5 -> 595b9d3590169b9ba8136efb3251b75c674d5dd4
+1ce9f7d6ad59b30608339ea5fd6cc7864b4cf743 -> 425a8733a66c162c1a6145ac6d6bc71ea15a5d9e
+bf33fcc75fe0d8c67153c3a0a118434dbb3bf060 -> b62382894f7fae4666874d163c8a1c2ef3fdc32d
+ab43d9da223123a6b8390dbbe0caa12ef2b0133f -> d35e528e86947fb382eb201b66d859a0f5eb53d5
+e44d89784989099f526fc50629a9698cc383620a -> 3656235f4d23310271c0dc1f82b54927d687b4ff
+96519d171128edc4551d266c82bb55430b931183 -> 74f15606227fa8afa126950640b9e4b4e85d81df
+cffc65c8a63f0e62f0e215c55d773fbdd6ba111a -> 645741e9c0f4961c2b07d04ae7b41f1f6e4a919c
+8690710e80a04551bbe41ff609f8c1f150c1f0b0 -> 767f02c74887a04ce100f266f3cd2a10017204e2
+228162ec531d6d59bc600e6837713361213881a9 -> c6662f569a177fd5ccbdf4446d943fafa8329b2b
