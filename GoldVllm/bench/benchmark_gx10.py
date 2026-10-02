@@ -11,10 +11,10 @@ Datei: `messungen/baseline-gx10.json`. Keine Container, keine Units, keine Flags
 Der API-Key wird zur Laufzeit ermittelt (Umgebungsvariable VLLM_API_KEY, sonst
 aus dem Container-Cmd) und **niemals ausgegeben, protokolliert oder gespeichert**.
 
-    python tools/benchmark_gx10.py --nur-umgebung     # nur Inventar, keine Last
-    python tools/benchmark_gx10.py --nur-schnell      # Tests A-E ohne Dauerlast
-    python tools/benchmark_gx10.py                    # alles, inkl. 10 min Dauerlast
-    python tools/benchmark_gx10.py --tabelle          # Baseline aus JSON neu drucken
+    python bench/benchmark_gx10.py --nur-umgebung     # nur Inventar, keine Last
+    python bench/benchmark_gx10.py --nur-schnell      # Tests A-E ohne Dauerlast
+    python bench/benchmark_gx10.py                    # alles, inkl. 10 min Dauerlast
+    python bench/benchmark_gx10.py --tabelle          # Baseline aus JSON neu drucken
 """
 from __future__ import annotations
 
@@ -26,7 +26,6 @@ import re
 import shutil
 import statistics
 import subprocess
-import sys
 import threading
 import time
 import urllib.error

@@ -1,5 +1,19 @@
+# Eine Datei fuer das ganze Repo. Bis 02.10.2026 lag in GoldVllm/ eine zweite
+# mit "* text=auto"; als tiefere Datei hat sie die Binaer-Regeln hier oben fuer
+# alles unter GoldVllm/ ueberstimmt (git check-attr: text=auto statt binary).
+* text=auto
+
 # Erzeugte Binaer- und Vektordateien nie als Text behandeln (CRLF zerstoert PDF-/Length)
 *.pdf binary
 *.npy binary
 *.ai  binary
 *.eps binary
+
+# Laeuft auf dem GB10 unter Linux: auch in einem Windows-Checkout mit LF
+*.sh      text eol=lf
+*.service text eol=lf
+*.timer   text eol=lf
+*.socket  text eol=lf
+*.patch   text eol=lf
+*.default text eol=lf
+GoldVllm/config/systemd/llm-server.service.gx10-original text eol=lf

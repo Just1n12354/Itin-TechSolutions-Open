@@ -1,0 +1,5 @@
+# Lokaler Altstand vor V2 (02.10.2026), nicht Teil des Repos
+V1/
+
+__pycache__/
+*.pyc

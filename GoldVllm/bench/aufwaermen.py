@@ -27,9 +27,9 @@ wird gar nicht geprefillt - dann wandert auch die PLE-Tabelle nicht durch.
 
 Der API-Key wird nie ausgegeben.
 
-    tools/aufwaermen.py --container bench-flash-nomtp
+    bench/aufwaermen.py --container bench-flash-nomtp
 """
-import argparse, json, os, subprocess, sys, time, urllib.request, urllib.error
+import argparse, json, os, subprocess, time, urllib.request, urllib.error
 from pathlib import Path
 
 DOMAENE = Path(__file__).resolve().parents[2]     # Domaene "Nvidia Gx10" (Korpus in sources/)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ergaenzungsmessung Nachtlauf 21./22.09.2026 - identisch fuer A und alle Kandidaten.
 
-Ergaenzt tools/benchmark_gx10.py (Methodik 1.3: A-E, G) um das, was dort fehlt:
+Ergaenzt bench/benchmark_gx10.py (Methodik 1.3: A-E, G) um das, was dort fehlt:
   ctx      Kontexte ~30k / ~80k / ~110k Tokens: TTFT kalt, TTFT mit Prefix-Treffer
            (angehaengter Turn wie bei Ben), Decode-Rate nach langem Kontext
   decode   reine Generierung, kurzer Prompt, 3 Wiederholungen
